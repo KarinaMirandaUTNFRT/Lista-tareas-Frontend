@@ -7,7 +7,8 @@ function App() {
     <>
       <Navbar></Navbar>
       <main className="container my-3">
-        <h1 className="text-center">Administrar Tareas</h1>
+        <h1 className="text-center">Lista de Colores</h1>
+        <h2 className="text-center">Ingresa un color (en ingles)</h2>
         <div>
           <FormularioTarea></FormularioTarea>
         </div>
