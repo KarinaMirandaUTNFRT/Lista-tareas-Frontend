@@ -1,6 +1,6 @@
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
-import FormularioColor from './components/FormularioColor';
+import FormularioTarea from './components/FormularioTarea';
 
 function App() {
   return (
@@ -9,10 +9,10 @@ function App() {
       
       
       <main className="container my-5">
-        <h2 className="text-center mb-4 text-secondary">Paleta de Colores</h2>
+        <h2 className="text-center mb-4 text-secondary">Lista tarea</h2>
         
         
-        <FormularioColor />
+        <FormularioTarea />
       </main>
       
       <Footer />
