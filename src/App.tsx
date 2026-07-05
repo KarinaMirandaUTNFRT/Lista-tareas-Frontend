@@ -1,4 +1,4 @@
-import Footer from "./components/Footer";
+import Footer from "./components/shared/footer";
 import Navbar from "./components/Navbar";
 import FormularioTarea from './components/FormularioTarea';
 
