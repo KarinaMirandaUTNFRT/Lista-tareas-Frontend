@@ -6,7 +6,7 @@ const Menu = () => {
           {/* Logo */}
           <div className="shrink-0 flex items-center gap-2 text-xl tracking-wider">
             <i className="bi bi-code-slash text-blue-500"></i>
-            <span className="font-bold uppercase">Code Company </span>
+            <span className="font-bold uppercase">Code tarea </span>
           </div>
 
           {/* Desktop Menu */}
