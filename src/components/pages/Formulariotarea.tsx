@@ -198,7 +198,7 @@ const FormularioServicio = ({ titulo }: FormularioServicioProps) => {
               type="submit"
               className="w-full md:w-auto px-8 py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-lg transition-all active:scale-95 shadow-lg shadow-blue-900/20"
             >
-              Guardar Servicio
+              Guardar tarea
             </button>
           </div>
         </form>
