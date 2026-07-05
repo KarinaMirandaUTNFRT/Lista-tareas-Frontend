@@ -1,10 +1,11 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Error404 from "./components/pages/Error404";
-import Inicio from "./components/pages/Inicio";
 import Administrador from "./components/pages/Administrador";
 import Login from "./components/pages/Login";
 import Footer from "./components/shared/footer";
 import Menu from "./components/shared/Menu";
-import { BrowserRouter, Routes, Route } from "react-router";
+
+import Inicio from "./components/pages/Inicio";
 
 function App() {
   return (
