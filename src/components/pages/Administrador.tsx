@@ -32,7 +32,7 @@ const Administrador = () => {
                 #
               </th>
               <th className="px-6 py-4 text-xs uppercase tracking-wider text-zinc-500 font-bold">
-                Servicio
+                Nombre de Tarea
               </th>
               <th className="px-6 py-4 text-xs uppercase tracking-wider text-zinc-500 font-bold">
                 Precio
