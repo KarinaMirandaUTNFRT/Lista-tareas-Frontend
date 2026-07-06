@@ -31,7 +31,7 @@ const DetalleTarea = () => {
                 className="w-full h-64 object-cover rounded mb-4 border border-zinc-700"
             />
             <p className="text-lg mb-2">
-                <span className="font-semibold">Fecha:</span> ${tarea.precio.toLocaleString("es-AR")}
+                <span className="font-semibold">Fecha:</span> ${tarea.fecha.toLocaleString("es-AR")}
             </p>
             <p className="text-lg mb-2">
                 <span className="font-semibold">Categoría:</span> {tarea.categoria}

@@ -29,7 +29,7 @@ const CardTarea = () => {
         <div className="pt-4 border-t border-zinc-800 mt-auto">
           <div className="flex items-center justify-between gap-2">
             <div>
-              <p className="text-xs text-zinc-500 uppercase font-semibold">Precio</p>
+              <p className="text-xs text-zinc-500 uppercase font-semibold">Fecha</p>
               <p className="text-lg font-mono text-zinc-200">
                 Fecha
               </p>
