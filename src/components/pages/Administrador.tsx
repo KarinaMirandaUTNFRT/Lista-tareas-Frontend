@@ -8,10 +8,10 @@ const Administrador = () => {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-zinc-900/40 p-6 rounded-2xl border border-zinc-800">
         <div>
           <h1 className="text-2xl font-bold text-white">
-            Panel de Administración
+            Panel de tareas
           </h1>
           <p className="text-zinc-500 text-sm">
-            Gestiona el catálogo de servicios disponibles.
+            Gestiona las tareas a realizar
           </p>
         </div>
         <a
@@ -19,7 +19,7 @@ const Administrador = () => {
           
         >
           <i className="bi bi-plus-lg"></i>
-          Crear Servicio
+          Ingresa la tarea
         </a>
       </div>
 
@@ -35,10 +35,10 @@ const Administrador = () => {
                 Nombre de Tarea
               </th>
               <th className="px-6 py-4 text-xs uppercase tracking-wider text-zinc-500 font-bold">
-                Precio
+                Fecha
               </th>
               <th className="px-6 py-4 text-xs uppercase tracking-wider text-zinc-500 font-bold text-center">
-                Acciones
+                Descripcion
               </th>
             </tr>
           </thead>

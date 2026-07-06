@@ -1,47 +1,47 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
-import type { ServicioFormData } from "../../interfaces/servicios";
+import type { TareaFormData } from "../../interfaces/tareas";
 import { useAppContext } from "../../context/AppContext";
 import Swal from "sweetalert2";
 import { useNavigate, useParams } from "react-router";
 import { useEffect } from "react";
 
-interface FormularioServicioProps {
+interface FormularioTareaProps {
   titulo: string;
 }
 
-const FormularioServicio = ({ titulo }: FormularioServicioProps) => {
+const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
     setValue,
-  } = useForm<ServicioFormData>();
+  } = useForm<TareaFormData>();
   // traigo los datos que necesito del contexto
-  const { crearServicio, buscarServicio, editarServicio } = useAppContext();
+  const { crearTarea, buscarTarea, editarTarea } = useAppContext();
   // traer el id de la ruta
   const { id } = useParams<{ id: string }>();
   const navegacion = useNavigate();
 
   useEffect(() => {
-    if (titulo.includes("Editar") && id && buscarServicio) {
-      const servicioBuscado = buscarServicio(id);
-      if (servicioBuscado) {
-        setValue("nombreServicio", servicioBuscado.nombreServicio);
-        setValue("precio", servicioBuscado.precio);
-        setValue("categoria", servicioBuscado.categoria);
-        setValue("descripcion", servicioBuscado.descripcion);
-        setValue("imagen", servicioBuscado.imagen);
+    if (titulo.includes("Editar") && id && buscarTarea) {
+      const tareaBuscada = buscarTarea(id);
+      if (tareaBuscada) {
+        setValue("nombreTarea", tareaBuscada.nombreTarea);
+        setValue("precio", tareaBuscada.precio);
+        setValue("categoria", tareaBuscada.categoria);
+        setValue("descripcion", tareaBuscada.descripcion);
+        setValue("imagen", tareaBuscada.imagen);
       }
     }
   }, []);
 
-  const onSubmit: SubmitHandler<ServicioFormData> = (data, e) => {
+  const onSubmit: SubmitHandler<TareaFormData> = (data, e) => {
     console.log(data);
-    if (titulo.includes("Crear") && crearServicio) {
-      crearServicio(data);
+    if (titulo.includes("Crear") && crearTarea) {
+      crearTarea(data);
       Swal.fire({
-        title: "Servicio creado",
-        text: `El servicio '${data.nombreServicio}' fue creado correctamente`,
+        title: "Tarea creada",
+        text: `La Tarea '${data.nombreTarea}' fue creado correctamente`,
         icon: "success",
         background: "#18181b",
         color: "#f4f4f5",
@@ -51,10 +51,10 @@ const FormularioServicio = ({ titulo }: FormularioServicioProps) => {
         (e.target as HTMLFormElement).reset();
       }
     } else if (id) {
-      editarServicio(id, data);
+      editarTarea(id, data);
       Swal.fire({
-        title: "Servicio editado",
-        text: `El servicio '${data.nombreServicio}' fue editado correctamente`,
+        title: "Tarea editada",
+        text: `La Tarea '${data.nombreTarea}' fue editado correctamente`,
         icon: "success",
         background: "#18181b",
         color: "#f4f4f5",
@@ -80,23 +80,23 @@ const FormularioServicio = ({ titulo }: FormularioServicioProps) => {
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Nombre del Servicio */}
+            {/* Nombre del Tarea */}
             <div className="md:col-span-2">
               <label className="block text-sm font-medium text-zinc-300 mb-2">
-                Nombre del Servicio*
+                Nombre del Tarea*
               </label>
               <input
                 type="text"
                 placeholder="Ej: Diseño de sitio web institucional"
-                className={inputClass(!!errors.nombreServicio)}
-                {...register("nombreServicio", {
+                className={inputClass(!!errors.nombreTarea)}
+                {...register("nombreTarea", {
                   required: "El nombre es obligatorio",
                   minLength: { value: 5, message: "Mínimo 5 caracteres" },
                   maxLength: { value: 100, message: "Máximo 100 caracteres" },
                 })}
               />
               <p className="text-red-500 text-xs mt-1 italic">
-                {errors.nombreServicio?.message}
+                {errors.nombreTarea?.message}
               </p>
             </div>
 
@@ -179,7 +179,7 @@ const FormularioServicio = ({ titulo }: FormularioServicioProps) => {
               </label>
               <textarea
                 rows={4}
-                placeholder="Describa el servicio detalladamente..."
+                placeholder="Describa el Tarea detalladamente..."
                 className={inputClass(!!errors.descripcion)}
                 {...register("descripcion", {
                   required: "La descripción es obligatoria",
@@ -207,4 +207,4 @@ const FormularioServicio = ({ titulo }: FormularioServicioProps) => {
   );
 };
 
-export default FormularioServicio;
+export default FormularioTarea;

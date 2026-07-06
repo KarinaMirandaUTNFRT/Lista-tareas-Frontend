@@ -5,7 +5,7 @@ const ItemTabla = () => {
         1
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-zinc-200">
-        nombreServicio
+        Nombre Tarea
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-sm text-zinc-400 font-mono">
         $50

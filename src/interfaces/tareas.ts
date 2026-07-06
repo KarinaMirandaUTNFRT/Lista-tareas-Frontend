@@ -1,10 +1,10 @@
-export interface Servicio {
+export interface Tarea {
   id: string;
-  nombreServicio: string;
+  nombreTarea: string;
   precio: number;
   imagen: string;
   categoria: string;
   descripcion: string;
 }
 
-export type ServicioFormData = Omit<Servicio, 'id'>;
+export type TareaFormData = Omit<Tarea, 'id'>;

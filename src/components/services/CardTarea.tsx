@@ -1,4 +1,4 @@
-const CardServicio = () => {
+const CardTarea = () => {
 
   return (
     <article className="group bg-zinc-900 rounded-xl overflow-hidden border border-zinc-800 hover:border-blue-500/50 transition-all duration-300 shadow-lg hover:shadow-blue-500/10 flex flex-col h-full">
@@ -19,7 +19,7 @@ const CardServicio = () => {
       {/* Cuerpo de la Card */}
       <div className="p-5 flex flex-col flex-grow">
         <h3 className="text-xl font-bold text-zinc-100 mb-2 group-hover:text-blue-400 transition-colors">
-          nombre
+          Tarea
         </h3>
         
         <p className="text-zinc-400 text-sm line-clamp-3 mb-4 flex-grow">
@@ -31,7 +31,7 @@ const CardServicio = () => {
             <div>
               <p className="text-xs text-zinc-500 uppercase font-semibold">Precio</p>
               <p className="text-lg font-mono text-zinc-200">
-                precio
+                Fecha
               </p>
             </div>
             
@@ -45,4 +45,4 @@ const CardServicio = () => {
   );
 };
 
-export default CardServicio;
+export default CardTarea;
