@@ -9,18 +9,18 @@ interface LoginFormInputs {
 }
 
 const Login = () => {
-  const {setUsuarioLogueado} = useAppContext()
+  const { setUsuarioLogueado } = useAppContext();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<LoginFormInputs>();
-  const navegacion = useNavigate()
+  const navegacion = useNavigate();
 
   const onSubmit = (data: LoginFormInputs) => {
     console.log(data);
     //1- si los datos del formulario son correctos y coinciden con las credenciales del admin loguear al usuario
-      if (
+    if (
       data.email === import.meta.env.VITE_EMAIL &&
       data.password === import.meta.env.VITE_PASSWORD
     ) {
@@ -34,7 +34,7 @@ const Login = () => {
         confirmButtonColor: "#3b82f6",
       });
       //redirecciono al admin
-      navegacion('/administrador');
+      navegacion("/administrador");
     } else {
       Swal.fire({
         title: "Ocurrió un error",
@@ -45,7 +45,6 @@ const Login = () => {
         confirmButtonColor: "#ef4444",
       });
     }
-  
   };
 
   return (
