@@ -1,7 +1,7 @@
 export interface Tarea {
   id: string;
   nombreTarea: string;
-  precio: number;
+  fecha: Date;
   imagen: string;
   categoria: string;
   descripcion: string;

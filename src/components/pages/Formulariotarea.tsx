@@ -27,7 +27,7 @@ const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
       const tareaBuscada = buscarTarea(id);
       if (tareaBuscada) {
         setValue("nombreTarea", tareaBuscada.nombreTarea);
-        setValue("precio", tareaBuscada.precio);
+        setValue("fecha", tareaBuscada.fecha);
         setValue("categoria", tareaBuscada.categoria);
         setValue("descripcion", tareaBuscada.descripcion);
         setValue("imagen", tareaBuscada.imagen);
@@ -100,23 +100,22 @@ const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
               </p>
             </div>
 
-            {/* Precio */}
+            {/* Fecha */}
             <div>
               <label className="block text-sm font-medium text-zinc-300 mb-2">
-                Precio*
+                Fecha*
               </label>
               <input
-                type="number"
-                placeholder="Ej: 50000"
-                className={inputClass(!!errors.precio)}
-                {...register("precio", {
-                  required: "El precio es obligatorio",
-                  min: { value: 50, message: "Mínimo $50" },
-                  valueAsNumber: true,
+                type="date"
+                placeholder="Ej: 2026-10-05"
+                className={inputClass(!!errors.fecha)}
+                {...register("fecha", {
+                  required: "El fecha es obligatorio",
+                 valueAsNumber: true,
                 })}
               />
               <p className="text-red-500 text-xs mt-1 italic">
-                {errors.precio?.message}
+                {errors.fecha?.message}
               </p>
             </div>
 

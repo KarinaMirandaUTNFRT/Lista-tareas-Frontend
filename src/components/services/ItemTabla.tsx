@@ -8,7 +8,7 @@ const ItemTabla = () => {
         Nombre Tarea
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-sm text-zinc-400 font-mono">
-        $50
+        2026-10-08
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
         <div className="flex gap-3">
