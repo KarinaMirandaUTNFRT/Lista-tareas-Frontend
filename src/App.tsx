@@ -1,8 +1,8 @@
-import Error404 from "./components/pages/Error404";
 import Inicio from "./components/pages/Inicio";
 import Administrador from "./components/pages/Administrador";
 import FormularioTarea from "./components/pages/Formulariotarea";
 import Login from "./components/pages/Login";
+import DetalleTarea from "./components/pages/DetalleTarea";
 import Footer from "./components/shared/Footer";
 import Menu from "./components/shared/Menu";
 import { BrowserRouter, Routes, Route } from "react-router";
@@ -10,7 +10,7 @@ import ProtectorRutas from "./components/routes/ProtectorRutas";
 import { useEffect, useState } from "react";
 import { AppContext } from "./context/AppContext";
 import type { Tarea, TareaFormData } from "./interfaces/tareas";
-import DetalleTarea from "./components/pages/DetalleTarea";
+import Error404 from "./components/pages/Error404";
 
 function App() {
   const usuarioSessionStorage = JSON.parse(
