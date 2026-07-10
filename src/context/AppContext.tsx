@@ -4,8 +4,11 @@ import type { Tarea, TareaFormData } from "../interfaces/tareas";
 export interface AppContextType {
   usuarioLogueado: boolean;
   setUsuarioLogueado: React.Dispatch<React.SetStateAction<boolean>>;
-  tareas: Tarea[];
-  crearTarea: (nuevoTarea: TareaFormData) => void;
+  servicios: Servicio[];
+  crearServicio: (nuevoServicio: ServicioFormData) => void;
+  borrarServicio: (idServicio: string) => void;
+  editarServicio: (idServicio: string, servicioEditar: ServicioFormData) => void;
+  buscarServicio: (idServicio: string) => Servicio | undefined;
 }
 
 export const AppContext = createContext<AppContextType | undefined>(undefined);
