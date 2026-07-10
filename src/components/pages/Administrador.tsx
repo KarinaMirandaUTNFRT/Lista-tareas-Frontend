@@ -1,26 +1,30 @@
+import { Link } from "react-router";
 import ItemTabla from "../services/ItemTabla";
-
+import { LuCirclePlus } from "react-icons/lu";
+import { useAppContext } from "../../context/AppContext";
 
 const Administrador = () => {
+  const { tareas } = useAppContext();
+
   return (
     <section className="animate-fadeIn space-y-6">
       {/* Header de la sección */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-zinc-900/40 p-6 rounded-2xl border border-zinc-800">
         <div>
           <h1 className="text-2xl font-bold text-white">
-            Panel de tareas
+            Panel de Administración
           </h1>
           <p className="text-zinc-500 text-sm">
-            Gestiona las tareas a realizar
+            Gestiona el catálogo de tareas disponibles.
           </p>
         </div>
-        <a
+        <Link
+          to={"/administrador/crear"}
           className="bg-blue-600 hover:bg-blue-500 text-white px-5 py-2.5 rounded-xl font-bold transition-all shadow-lg shadow-blue-900/20 active:scale-95 flex items-center gap-2"
-          
         >
-          <i className="bi bi-plus-lg"></i>
-          Ingresa la tarea
-        </a>
+          <LuCirclePlus />
+          Crear Tabla
+        </Link>
       </div>
 
       {/* Contenedor de la Tabla con Scroll Horizontal para móviles */}
@@ -32,18 +36,35 @@ const Administrador = () => {
                 #
               </th>
               <th className="px-6 py-4 text-xs uppercase tracking-wider text-zinc-500 font-bold">
-                Nombre de Tarea
+                Tabla
               </th>
               <th className="px-6 py-4 text-xs uppercase tracking-wider text-zinc-500 font-bold">
-                Fecha
+                Precio
               </th>
               <th className="px-6 py-4 text-xs uppercase tracking-wider text-zinc-500 font-bold text-center">
-                Descripcion
+                Acciones
               </th>
             </tr>
           </thead>
           <tbody className="divide-y divide-zinc-800/50">
-            <ItemTabla />
+            {tareas.length > 0 ? (
+              tareas.map((tarea, indice) => (
+                <ItemTabla
+                  key={tarea.id}
+                  tarea={tarea}
+                  fila={indice + 1}
+                />
+              ))
+            ) : (
+              <tr>
+                <td
+                  colSpan={4}
+                  className="px-6 py-12 text-center text-zinc-500 italic"
+                >
+                  No hay tareas registrados para administrar.
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
