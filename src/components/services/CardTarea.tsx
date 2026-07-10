@@ -40,14 +40,16 @@ const CardTarea = ({ tarea }: CardTareaProps) => {
            {tarea.descripcion}
         </p>
 
-        <div className="pt-4 border-t border-zinc-800 mt-auto">
+       <div className="pt-4 border-t border-zinc-800 mt-auto">
           <div className="flex items-center justify-between gap-2">
-            <div>
-              <p className="text-xs text-zinc-500 uppercase font-semibold">Precio</p>
+            {/*<div>
+              <p className="text-xs text-zinc-500 uppercase font-semibold">
+                Precio
+                </p>
               <p className="text-lg font-mono text-zinc-200">
-                {formatearPrecio(tarea.fecha)}
-              </p>
-            </div>
+                {formatearFecha(tarea.fecha)}
+              //p>
+            </div>*/}
             
             <Link to={`tarea/${tarea.id}`} className="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg text-sm font-bold transition-colors shadow-md shadow-blue-900/20 active:scale-95">
               Ver detalle
