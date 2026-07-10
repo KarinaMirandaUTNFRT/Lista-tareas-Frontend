@@ -39,7 +39,7 @@ const Administrador = () => {
                 Tabla
               </th>
               <th className="px-6 py-4 text-xs uppercase tracking-wider text-zinc-500 font-bold">
-                Precio
+                fecha
               </th>
               <th className="px-6 py-4 text-xs uppercase tracking-wider text-zinc-500 font-bold text-center">
                 Acciones
