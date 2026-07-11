@@ -75,27 +75,30 @@ const CardTarea = ({ tarea }: CardTareaProps) => {
         <h3 className="text-xl font-bold text-zinc-100 mb-2 group-hover:text-blue-400 transition-colors">
           {tarea.nombreTarea}
         </h3>
-
         <p className="text-zinc-400 text-sm line-clamp-3 mb-4 grow">
           {tarea.descripcion}
         </p>
-
         <div className="pt-4 border-t border-zinc-800 mt-auto">
           <div className="flex items-center justify-between gap-2">
-            <div className="text-sm text-zinc-400 font-mono">
-              {tarea.fecha
-                ? (() => {
-                    const fechaObj = new Date(tarea.fecha);
+            <div className="flex flex-col gap-0.5">
+              {/* 🏷️ Frase indicadora fija */}
+              <span className="text-[11px] uppercase font-bold tracking-wider text-zinc-500 select-none">
+                Entrega límite
+              </span>
 
-                    return !isNaN(fechaObj.getTime())
-                      ? fechaObj.toLocaleDateString("es-AR", {
-                          timeZone: "UTC",
-                        })
-                      : "Sin fecha";
-                  })()
-                : "Sin fecha"}
+              <div className="text-sm text-zinc-400 font-mono">
+                {tarea.fecha
+                  ? (() => {
+                      const fechaObj = new Date(tarea.fecha);
+                      return !isNaN(fechaObj.getTime())
+                        ? fechaObj.toLocaleDateString("es-AR", {
+                            timeZone: "UTC",
+                          })
+                        : "Sin fecha";
+                    })()
+                  : "Sin fecha"}
+              </div>
             </div>
-
             <Link
               to={`tarea/${tarea.id}`}
               className="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg text-sm font-bold transition-colors shadow-md shadow-blue-900/20 active:scale-95"
