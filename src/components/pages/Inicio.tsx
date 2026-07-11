@@ -4,7 +4,7 @@ import CardTarea from "../services/CardTarea";
 const Inicio = () => {
   const { tareas } = useAppContext();
   return (
-    <section className="space-y-8 animate-fadeIn">
+    <section className="space-y-8 animate-fadeIn max-w-5xl mx-auto px-4 py-6">
       {/* Encabezado con estilo moderno */}
       <div className="flex flex-col md:flex-row md:items-center justify-between border-b border-zinc-800 pb-5 gap-4">
         <div>
@@ -21,7 +21,7 @@ const Inicio = () => {
         </div>
       </div>
      {tareas.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="w-full flex flex-col gap-4">
           {tareas.map((tarea) => (
             <CardTarea key={tarea.id} tarea={tarea} />
           ))}

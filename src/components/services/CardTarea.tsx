@@ -48,7 +48,8 @@ const CardTarea = ({ tarea }: CardTareaProps) => {
     configuracionCategorias[tarea.categoria] || configuracionCategorias.Defecto;
   const IconoCategoria = config.Icono;
   return (
-    <article className="group w-full bg-zinc-900 rounded-xl border border-zinc-800 hover:border-blue-500/40 transition-all duration-300 shadow-lg flex flex-col md:flex-row items-center p-4 gap-5">
+    <article className="group w-full bg-zinc-900 rounded-xl border border-zinc-800 hover:border-blue-500/40 
+    transition-all duration-300 shadow-lg flex flex-col md:flex-row items-center p-4 gap-5">
       <div
         className={`w-16 h-16 shrink-0 rounded-xl border flex items-center justify-center transition-colors duration-300 ${config.clasesFondo}`}
       >
