@@ -39,22 +39,12 @@ const iconosPorArea: Record<string, { Icono: any; color: string }> = {
   },
 };
 const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
-  const{
-  register,
-  handleSubmit,
-  formState: { errors },
-    setValue,
-  watch,
-  }= useForm<TareaFormData>();
-
-const areaSeleccionada = watch("categoria");
-
-const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
     setValue,
+    watch,
   } = useForm<TareaFormData>();
 
   const areaSeleccionada = watch("categoria");
@@ -258,5 +248,5 @@ const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
     </section>
   );
 };
-};
+
 export default FormularioTarea;
