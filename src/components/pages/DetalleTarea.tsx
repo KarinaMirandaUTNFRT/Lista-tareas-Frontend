@@ -1,11 +1,49 @@
 import { useParams, useNavigate, Link } from "react-router";
 import { useAppContext } from "../../context/AppContext";
 import { useEffect } from "react";
+import { 
+MdOutlineDesktopWindows, 
+MdOutlineAssignmentInd,
+MdOutlineDashboard ,
+MdOutlineCellTower ,
+MdConnectWithoutContact,
+MdDataUsage 
+} from "react-icons/md";
+
+const configuracionCategorias: Record<string, { clasesFondo: string; Icono: any }> = {
+  Ventas: { 
+    clasesFondo: "bg-emerald-950/40 border-emerald-500/20 text-emerald-400", 
+    Icono: MdOutlineDesktopWindows 
+  },
+  Proveedores: { 
+    clasesFondo: "bg-amber-950/40 border-amber-500/20 text-amber-400", 
+    Icono: MdOutlineAssignmentInd 
+  },
+  Marketing: { 
+    clasesFondo: "bg-purple-950/40 border-purple-500/20 text-purple-400", 
+    Icono: MdOutlineDashboard 
+  },
+  Sistemas: { 
+    clasesFondo: "bg-blue-950/40 border-blue-500/20 text-blue-400", 
+    Icono: MdOutlineCellTower 
+  },
+  "Atencion al Cliente": { 
+    clasesFondo: "bg-pink-950/40 border-pink-500/20 text-pink-400", 
+    Icono: MdConnectWithoutContact 
+  },
+  Defecto: { 
+    clasesFondo: "bg-zinc-800 border-zinc-700 text-zinc-400", 
+    Icono: MdDataUsage 
+  }
+};
 
 const DetalleTarea = () => {
     const { id } = useParams<{ id: string }>();
     const { buscarTarea } = useAppContext();
     const navigate = useNavigate();
+
+    const config = configuracionCategorias[tarea?.categoria] || configuracionCategorias.Defecto;
+    const IconoCategoria = config.Icono;
 
     // Buscar el tarea por id
     const tarea = buscarTarea(id || '');
@@ -25,25 +63,32 @@ const DetalleTarea = () => {
     return (
         <div className="max-w-xl mx-auto bg-zinc-900 rounded-lg shadow-lg p-8 mt-8">
             <h2 className="text-3xl font-bold mb-4 text-center">{tarea.nombreTarea}</h2>
-            <img
-                src={tarea.imagen}
-                alt={tarea.nombreTarea}
-                className="w-full h-64 object-cover rounded mb-4 border border-zinc-700"
-            />
-            <p className="text-lg mb-2">
-                <span className="font-semibold">Fecha:</span> ${tarea.fecha.toLocaleString("es-AR")}
-            </p>
-            <p className="text-lg mb-2">
-                <span className="font-semibold">Categoría:</span> {tarea.categoria}
-            </p>
-            <p className="mb-4">
-                <span className="font-semibold">Descripción:</span> {tarea.descripcion}
-            </p>
+            <div className={`w-full h-64 rounded-lg border flex items-center justify-center mb-6 transition-all duration-300 ${config.clasesFondo}`}>
+      <IconoCategoria className="w-24 h-24 stroke-[1.2]" />
+    </div>
+
+            <p className="text-lg mb-3 text-zinc-300">
+      <span className="font-semibold text-zinc-400">Fecha:</span>{" "}
+      {tarea.fecha ? String(tarea.fecha).split("-").reverse().join("/") : "Sin fecha"}
+    </p>
+
+            <p className="text-lg mb-3 text-zinc-300">
+      <span className="font-semibold text-zinc-400">Categoría:</span>{" "}
+      <span className="bg-zinc-950/60 px-2 py-0.5 rounded border border-zinc-800 text-sm uppercase font-bold tracking-wider ml-1">
+        {tarea.categoria}
+      </span>
+    </p>
+
+    <p className="text-lg mb-8 text-zinc-300 leading-relaxed">
+      <span className="font-semibold text-zinc-400 block mb-1">Descripción:</span>{" "}
+      {tarea.descripcion || "Sin descripción disponible."}
+    </p>
+<div className="border-t border-zinc-800 pt-6"></div>
             <Link
                 to="/"
-                className="bg-zinc-700 hover:bg-zinc-600 text-white px-4 py-2 rounded"
+                className="inline-block bg-zinc-800 hover:bg-zinc-700 text-zinc-200 px-5 py-2.5 rounded-lg text-sm font-semibold transition-colors active:scale-95"
             >
-                Volver
+                Volver al Inicio
             </Link>
         </div>
     );

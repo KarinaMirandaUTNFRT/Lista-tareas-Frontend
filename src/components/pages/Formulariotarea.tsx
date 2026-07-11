@@ -4,27 +4,47 @@ import { useAppContext } from "../../context/AppContext";
 import Swal from "sweetalert2";
 import { useNavigate, useParams } from "react-router";
 import { useEffect } from "react";
-import { 
-MdOutlineDesktopWindows, 
-MdOutlineAssignmentInd,
-MdOutlineDashboard ,
-MdOutlineCellTower ,
-MdConnectWithoutContact,
-MdDataUsage 
+import {
+  MdOutlineDesktopWindows,
+  MdOutlineAssignmentInd,
+  MdOutlineDashboard,
+  MdOutlineCellTower,
+  MdConnectWithoutContact,
+  MdDataUsage,
 } from "react-icons/md";
 
 interface FormularioTareaProps {
   titulo: string;
 }
 const iconosPorArea: Record<string, { Icono: any; color: string }> = {
-  Ventas: { Icono: MdOutlineDesktopWindows, color: "text-emerald-400 bg-emerald-950/30 border-emerald-500/20" },
-  Proveedores: { Icono: MdOutlineAssignmentInd, color: "text-amber-400 bg-amber-950/30 border-amber-500/20" },
-  Marketing: { Icono: MdOutlineDashboard, color: "text-purple-400 bg-purple-950/30 border-purple-500/20" },
-  Sistemas: { Icono: MdOutlineCellTower, color: "text-blue-400 bg-blue-950/30 border-blue-500/20" },
-  "Atencion al Cliente": { Icono: MdConnectWithoutContact, color: "text-pink-400 bg-pink-950/30 border-pink-500/20" },
+  Ventas: {
+    Icono: MdOutlineDesktopWindows,
+    color: "text-emerald-400 bg-emerald-950/30 border-emerald-500/20",
+  },
+  Proveedores: {
+    Icono: MdOutlineAssignmentInd,
+    color: "text-amber-400 bg-amber-950/30 border-amber-500/20",
+  },
+  Marketing: {
+    Icono: MdOutlineDashboard,
+    color: "text-purple-400 bg-purple-950/30 border-purple-500/20",
+  },
+  Sistemas: {
+    Icono: MdOutlineCellTower,
+    color: "text-blue-400 bg-blue-950/30 border-blue-500/20",
+  },
+  "Atencion al Cliente": {
+    Icono: MdConnectWithoutContact,
+    color: "text-pink-400 bg-pink-950/30 border-pink-500/20",
+  },
 };
-const { register, handleSubmit, watch, formState: { errors } } = useForm<TareaFormData>();
- const areaSeleccionada = watch("categoria");
+const {
+  register,
+  handleSubmit,
+  watch,
+  formState: { errors },
+} = useForm<TareaFormData>();
+const areaSeleccionada = watch("categoria");
 
 const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
   const {
@@ -34,7 +54,8 @@ const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
     setValue,
   } = useForm<TareaFormData>();
 
-  
+  const areaSeleccionada = watch("categoria");
+
   // traigo los datos que necesito del contexto
   const { crearTarea, buscarTarea, editarTarea } = useAppContext();
   // traer el id de la ruta
@@ -52,10 +73,10 @@ const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
         setValue("imagen", tareaBuscada.imagen);
       }
     }
-  }, []);
+  }, [id, titulo, buscarTarea, setValue]);
 
   const onSubmit: SubmitHandler<TareaFormData> = (data, e) => {
-    console.log(data);
+    const datosConImagen = { ...data, imagen: "" };
     if (titulo.includes("Crear") && crearTarea) {
       crearTarea(data);
       Swal.fire({
@@ -69,8 +90,8 @@ const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
       if (e) {
         (e.target as HTMLFormElement).reset();
       }
-    } else if (id) {
-      editarTarea(id, data);
+    } else if (id && editarTarea) {
+      editarTarea(id, datosConImagen);
       Swal.fire({
         title: "Tarea editada",
         text: `La Tarea '${data.nombreTarea}' fue editado correctamente`,
@@ -106,7 +127,7 @@ const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
               </label>
               <input
                 type="text"
-                placeholder="Ej: Diseño de sitio web institucional"
+                placeholder="Ej: completar planilla exel"
                 className={inputClass(!!errors.nombreTarea)}
                 {...register("nombreTarea", {
                   required: "El nombre es obligatorio",
@@ -130,7 +151,7 @@ const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
                 className={inputClass(!!errors.fecha)}
                 {...register("fecha", {
                   required: "El fecha es obligatorio",
-                 valueAsNumber: true,
+                  valueAsNumber: true,
                 })}
               />
               <p className="text-red-500 text-xs mt-1 italic">
@@ -159,13 +180,13 @@ const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
                   Proveedores
                 </option>
                 <option value="Marketing" className="bg-zinc-900">
-                Marketing
+                  Marketing
                 </option>
                 <option value="Sistemas" className="bg-zinc-900">
-                Sistemas
+                  Sistemas
                 </option>
                 <option value="Atencion al Cliente" className="bg-zinc-900">
-                Atencion al Cliente
+                  Atencion al Cliente
                 </option>
               </select>
               <p className="text-red-500 text-xs mt-1 italic">
@@ -176,24 +197,28 @@ const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
             {/* URL Imagen */}
             <div className="md:col-span-2">
               <label className="block text-sm font-medium text-zinc-300 mb-2">
-                URL de Imagen*
+                Identificador Visual de Área
               </label>
-              <input
-                type="text"
-                placeholder="https://ejemplo.com/imagen.jpg"
-                className={inputClass(!!errors.imagen)}
-                {...register("imagen", {
-                  required: "La URL es obligatoria",
-                  pattern: {
-                    value: /\.(jpg|jpeg|png|webp|avif|svg)$/,
-                    message:
-                      "Debe ser una URL de imagen válida (jpg, png, webp, etc.)",
-                  },
-                })}
-              />
-              <p className="text-red-500 text-xs mt-1 italic">
-                {errors.imagen?.message}
-              </p>
+              {areaSeleccionada && iconosPorArea[areaSeleccionada] ? (
+                (() => {
+                  const { Icono, color } = iconosPorArea[areaSeleccionada];
+                  return (
+                    <div
+                      className={`w-full h-[52px] rounded-lg border flex items-center justify-center gap-3 transition-all duration-300 ${color}`}
+                    >
+                      <Icono className="w-6 h-6 animate-pulse" />
+                      <span className="text-sm font-semibold uppercase tracking-wider text-zinc-200">
+                        Ícono de {areaSeleccionada} Vinculado
+                      </span>
+                    </div>
+                  );
+                })()
+              ) : (
+                <div className="w-full h-[52px] rounded-lg border border-dashed border-zinc-700 bg-zinc-950/40 flex items-center justify-center text-sm text-zinc-500 italic select-none">
+                  Selecciona una categoría arriba para vincular su ícono
+                  automáticamente
+                </div>
+              )}
             </div>
 
             {/* Descripción */}
