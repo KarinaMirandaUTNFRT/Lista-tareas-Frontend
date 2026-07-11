@@ -133,14 +133,20 @@ const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
                 <option value="" className="bg-zinc-900">
                   Seleccione una opción
                 </option>
-                <option value="Desarrollo Web" className="bg-zinc-900">
-                  Desarrollo Web
+                <option value="Ventas" className="bg-zinc-900">
+                  Ventas
                 </option>
-                <option value="Backend & API" className="bg-zinc-900">
-                  Backend & API
+                <option value="Proveedores" className="bg-zinc-900">
+                  Proveedores
                 </option>
-                <option value="Consultoría" className="bg-zinc-900">
-                  Consultoría
+                <option value="Marketing" className="bg-zinc-900">
+                Marketing
+                </option>
+                <option value="Sistemas" className="bg-zinc-900">
+                Sistemas
+                </option>
+                <option value="Atencion al Cliente" className="bg-zinc-900">
+                Atencion al Cliente
                 </option>
               </select>
               <p className="text-red-500 text-xs mt-1 italic">
