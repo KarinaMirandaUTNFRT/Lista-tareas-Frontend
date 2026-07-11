@@ -110,9 +110,8 @@ const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
                 placeholder="Ej: 2026-10-05"
                 className={inputClass(!!errors.fecha)}
                 {...register("fecha", {
-                  required: "El fecha es obligatorio",
-                 valueAsNumber: true,
-                })}
+                  required: "La fecha es obligatoria",
+               })}
               />
               <p className="text-red-500 text-xs mt-1 italic">
                 {errors.fecha?.message}
