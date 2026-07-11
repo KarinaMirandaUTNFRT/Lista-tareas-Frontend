@@ -38,12 +38,15 @@ const iconosPorArea: Record<string, { Icono: any; color: string }> = {
     color: "text-pink-400 bg-pink-950/30 border-pink-500/20",
   },
 };
-const {
+const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
+  const{
   register,
   handleSubmit,
-  watch,
   formState: { errors },
-} = useForm<TareaFormData>();
+    setValue,
+  watch,
+  }= useForm<TareaFormData>();
+
 const areaSeleccionada = watch("categoria");
 
 const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
@@ -204,7 +207,7 @@ const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
                   const { Icono, color } = iconosPorArea[areaSeleccionada];
                   return (
                     <div
-                      className={`w-full h-[52px] rounded-lg border flex items-center justify-center gap-3 transition-all duration-300 ${color}`}
+                      className={`w-full h-13 rounded-lg border flex items-center justify-center gap-3 transition-all duration-300 ${color}`}
                     >
                       <Icono className="w-6 h-6 animate-pulse" />
                       <span className="text-sm font-semibold uppercase tracking-wider text-zinc-200">
@@ -214,7 +217,7 @@ const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
                   );
                 })()
               ) : (
-                <div className="w-full h-[52px] rounded-lg border border-dashed border-zinc-700 bg-zinc-950/40 flex items-center justify-center text-sm text-zinc-500 italic select-none">
+                <div className="w-full h-13 rounded-lg border border-dashed border-zinc-700 bg-zinc-950/40 flex items-center justify-center text-sm text-zinc-500 italic select-none">
                   Selecciona una categoría arriba para vincular su ícono
                   automáticamente
                 </div>
@@ -255,5 +258,5 @@ const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
     </section>
   );
 };
-
+};
 export default FormularioTarea;
