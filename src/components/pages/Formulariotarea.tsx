@@ -4,10 +4,27 @@ import { useAppContext } from "../../context/AppContext";
 import Swal from "sweetalert2";
 import { useNavigate, useParams } from "react-router";
 import { useEffect } from "react";
+import { 
+MdOutlineDesktopWindows, 
+MdOutlineAssignmentInd,
+MdOutlineDashboard ,
+MdOutlineCellTower ,
+MdConnectWithoutContact,
+MdDataUsage 
+} from "react-icons/md";
 
 interface FormularioTareaProps {
   titulo: string;
 }
+const iconosPorArea: Record<string, { Icono: any; color: string }> = {
+  Ventas: { Icono: MdOutlineDesktopWindows, color: "text-emerald-400 bg-emerald-950/30 border-emerald-500/20" },
+  Proveedores: { Icono: MdOutlineAssignmentInd, color: "text-amber-400 bg-amber-950/30 border-amber-500/20" },
+  Marketing: { Icono: MdOutlineDashboard, color: "text-purple-400 bg-purple-950/30 border-purple-500/20" },
+  Sistemas: { Icono: MdOutlineCellTower, color: "text-blue-400 bg-blue-950/30 border-blue-500/20" },
+  "Atencion al Cliente": { Icono: MdConnectWithoutContact, color: "text-pink-400 bg-pink-950/30 border-pink-500/20" },
+};
+const { register, handleSubmit, watch, formState: { errors } } = useForm<TareaFormData>();
+ const areaSeleccionada = watch("categoria");
 
 const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
   const {
@@ -16,6 +33,8 @@ const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
     formState: { errors },
     setValue,
   } = useForm<TareaFormData>();
+
+  
   // traigo los datos que necesito del contexto
   const { crearTarea, buscarTarea, editarTarea } = useAppContext();
   // traer el id de la ruta
