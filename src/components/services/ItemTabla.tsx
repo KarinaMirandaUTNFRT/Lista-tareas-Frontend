@@ -48,7 +48,7 @@ const ItemTabla = ({ tarea, fila }: ItemTablaProps) => {
         {tarea.nombreTarea}
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-sm text-zinc-400 font-mono">
-        ${tarea.fecha?.toLocaleString("es-AR")}
+        {tarea.fecha?.toLocaleString("es-AR")}
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
         <div className="flex gap-3">
