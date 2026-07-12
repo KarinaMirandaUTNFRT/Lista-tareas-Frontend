@@ -152,29 +152,7 @@ const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
                 {errors.categoria?.message}
               </p>
             </div>
-
-            {/* URL Imagen */}
-            <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-zinc-300 mb-2">
-                URL de Imagen*
-              </label>
-              <input
-                type="text"
-                placeholder="https://ejemplo.com/imagen.jpg"
-                className={inputClass(!!errors.imagen)}
-                {...register("imagen", {
-                  required: "La URL es obligatoria",
-                  pattern: {
-                    value: /\.(jpg|jpeg|png|webp|avif|svg)$/,
-                    message:
-                      "Debe ser una URL de imagen válida (jpg, png, webp, etc.)",
-                  },
-                })}
-              />
-              <p className="text-red-500 text-xs mt-1 italic">
-                {errors.imagen?.message}
-              </p>
-            </div>
+            
 
             {/* Descripción */}
             <div className="md:col-span-2">
