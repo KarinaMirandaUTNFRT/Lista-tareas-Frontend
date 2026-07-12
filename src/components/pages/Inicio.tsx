@@ -4,15 +4,19 @@ import CardTarea from "../services/CardTarea";
 const Inicio = () => {
   const { tareas } = useAppContext();
   return (
+<<<<<<< HEAD
     <section className="space-y-8 animate-fadeIn max-w-5xl mx-auto px-4 py-6">
+=======
+    <section className="w-full min-h-screen space-y-8 animate-fadeIn py-6 px-0">
+>>>>>>> dev
       {/* Encabezado con estilo moderno */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between border-b border-zinc-800 pb-5 gap-4">
-        <div>
-          <h1 className="text-3xl font-bold text-white tracking-tight">
-            Catálogo de <span className="text-blue-500">Tareas</span>
+      <div className="flex flex-col md:flex-row md:items-center justify-between border-b border-zinc-800 pb-5 gap-4 text-center">
+        <div className="w-full flex flex-col items-center justify-center mb-8 gap-2">
+          <h1 className="text-3xl font-bold text-white tracking-tight text-center">
+            Lista de  <span className="text-blue-500">Tareas</span>
           </h1>
-          <p className="text-zinc-400 mt-1 text-sm">
-            Explora nuestras soluciones tecnológicas personalizadas.
+          <p className="text-zinc-400 mt-1 text-sm text-center">
+            Tareas para el mes de Agosto de 2026
           </p>
         </div>
 
@@ -21,7 +25,11 @@ const Inicio = () => {
         </div>
       </div>
      {tareas.length > 0 ? (
+<<<<<<< HEAD
         <div className="w-full flex flex-col gap-4">
+=======
+        <div className="w-full flex flex-col gap-2">
+>>>>>>> dev
           {tareas.map((tarea) => (
             <CardTarea key={tarea.id} tarea={tarea} />
           ))}

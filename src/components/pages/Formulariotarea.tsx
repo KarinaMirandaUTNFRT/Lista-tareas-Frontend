@@ -110,9 +110,8 @@ const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
                 placeholder="Ej: 2026-10-05"
                 className={inputClass(!!errors.fecha)}
                 {...register("fecha", {
-                  required: "El fecha es obligatorio",
-                 valueAsNumber: true,
-                })}
+                  required: "La fecha es obligatoria",
+               })}
               />
               <p className="text-red-500 text-xs mt-1 italic">
                 {errors.fecha?.message}
@@ -133,43 +132,27 @@ const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
                 <option value="" className="bg-zinc-900">
                   Seleccione una opción
                 </option>
-                <option value="Desarrollo Web" className="bg-zinc-900">
-                  Desarrollo Web
+                <option value="Ventas" className="bg-zinc-900">
+                  Ventas
                 </option>
-                <option value="Backend & API" className="bg-zinc-900">
-                  Backend & API
+                <option value="Proveedores" className="bg-zinc-900">
+                  Proveedores
                 </option>
-                <option value="Consultoría" className="bg-zinc-900">
-                  Consultoría
+                <option value="Marketing" className="bg-zinc-900">
+                  Marketing
+                </option>
+                <option value="Sistemas" className="bg-zinc-900">
+                  Sistemas
+                </option>
+                <option value="Atencion al Cliente" className="bg-zinc-900">
+                  Atencion al Cliente
                 </option>
               </select>
               <p className="text-red-500 text-xs mt-1 italic">
                 {errors.categoria?.message}
               </p>
             </div>
-
-            {/* URL Imagen */}
-            <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-zinc-300 mb-2">
-                URL de Imagen*
-              </label>
-              <input
-                type="text"
-                placeholder="https://ejemplo.com/imagen.jpg"
-                className={inputClass(!!errors.imagen)}
-                {...register("imagen", {
-                  required: "La URL es obligatoria",
-                  pattern: {
-                    value: /\.(jpg|jpeg|png|webp|avif|svg)$/,
-                    message:
-                      "Debe ser una URL de imagen válida (jpg, png, webp, etc.)",
-                  },
-                })}
-              />
-              <p className="text-red-500 text-xs mt-1 italic">
-                {errors.imagen?.message}
-              </p>
-            </div>
+            
 
             {/* Descripción */}
             <div className="md:col-span-2">

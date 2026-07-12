@@ -56,7 +56,7 @@ const Login = () => {
           </h2>
           <p className="mt-2 text-center text-sm text-zinc-400">
             Accede al panel de control de{" "}
-            <span className="text-blue-500 font-semibold">CODE</span>
+            <span className="text-blue-500 font-semibold">MI EMPRESA</span>
           </p>
         </div>
 

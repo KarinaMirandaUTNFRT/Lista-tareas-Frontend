@@ -1,4 +1,4 @@
-import { useParams, useNavigate, Link } from "react-router";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { useAppContext } from "../../context/AppContext";
 import { useEffect } from "react";
 
@@ -23,18 +23,18 @@ const DetalleTarea = () => {
 
 
     return (
-        <div className="max-w-xl mx-auto bg-zinc-900 rounded-lg shadow-lg p-8 mt-8">
+        <div className="text-center max-w-xl mx-auto bg-zinc-900 rounded-lg shadow-lg p-8 mt-8">
+          <span className="text-center text-[30px] uppercase font-bold tracking-wider text-zinc-500 select-none mb-1">
+                    Tarea a realizar:
+                </span>
+
             <h2 className="text-3xl font-bold mb-4 text-center">{tarea.nombreTarea}</h2>
-            <img
-                src={tarea.imagen}
-                alt={tarea.nombreTarea}
-                className="w-full h-64 object-cover rounded mb-4 border border-zinc-700"
-            />
+            
             <p className="text-lg mb-2">
-                <span className="font-semibold">Fecha:</span> ${tarea.fecha.toLocaleString("es-AR")}
+                <span className="font-semibold">Fecha Limite:</span> {tarea.fecha.toLocaleString("es-AR")}
             </p>
             <p className="text-lg mb-2">
-                <span className="font-semibold">Categoría:</span> {tarea.categoria}
+                <span className="font-semibold">Area Responsable:</span> {tarea.categoria}
             </p>
             <p className="mb-4">
                 <span className="font-semibold">Descripción:</span> {tarea.descripcion}
