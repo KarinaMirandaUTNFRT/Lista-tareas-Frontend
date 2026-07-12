@@ -1,11 +1,49 @@
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { useAppContext } from "../../context/AppContext";
 import { useEffect } from "react";
+import { 
+MdOutlineDesktopWindows, 
+MdOutlineAssignmentInd,
+MdOutlineDashboard ,
+MdOutlineCellTower ,
+MdConnectWithoutContact,
+MdDataUsage 
+} from "react-icons/md";
+
+const configuracionCategorias: Record<string, { clasesFondo: string; Icono: any }> = {
+  Ventas: { 
+    clasesFondo: "bg-emerald-950/40 border-emerald-500/20 text-emerald-400", 
+    Icono: MdOutlineDesktopWindows 
+  },
+  Proveedores: { 
+    clasesFondo: "bg-amber-950/40 border-amber-500/20 text-amber-400", 
+    Icono: MdOutlineAssignmentInd 
+  },
+  Marketing: { 
+    clasesFondo: "bg-purple-950/40 border-purple-500/20 text-purple-400", 
+    Icono: MdOutlineDashboard 
+  },
+  Sistemas: { 
+    clasesFondo: "bg-blue-950/40 border-blue-500/20 text-blue-400", 
+    Icono: MdOutlineCellTower 
+  },
+  "Atencion al Cliente": { 
+    clasesFondo: "bg-pink-950/40 border-pink-500/20 text-pink-400", 
+    Icono: MdConnectWithoutContact 
+  },
+  Defecto: { 
+    clasesFondo: "bg-zinc-800 border-zinc-700 text-zinc-400", 
+    Icono: MdDataUsage 
+  }
+};
 
 const DetalleTarea = () => {
     const { id } = useParams<{ id: string }>();
     const { buscarTarea } = useAppContext();
     const navigate = useNavigate();
+
+    const config = configuracionCategorias[tarea.categoria || "Defecto"] || configuracionCategorias.Defecto;
+    const IconoCategoria = config.Icono;
 
     // Buscar el tarea por id
     const tarea = buscarTarea(id || '');
@@ -41,9 +79,9 @@ const DetalleTarea = () => {
             </p>
             <Link
                 to="/"
-                className="bg-zinc-700 hover:bg-zinc-600 text-white px-4 py-2 rounded"
+                className="inline-block bg-zinc-800 hover:bg-zinc-700 text-zinc-200 px-5 py-2.5 rounded-lg text-sm font-semibold transition-colors active:scale-95"
             >
-                Volver
+                Volver al Inicio
             </Link>
         </div>
     );

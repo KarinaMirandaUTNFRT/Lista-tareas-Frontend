@@ -14,7 +14,7 @@ const Inicio = () => {
           <p className="text-zinc-400 mt-1 text-sm text-center">
             Tareas para el mes de Agosto de 2026
           </p>
-        </div>
+        </div> 
 
         <div className="text-xs text-zinc-500 bg-zinc-900 px-3 py-1 rounded-full border border-zinc-800 self-start md:self-center">
            {tareas.length} tareas disponibles
