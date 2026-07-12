@@ -4,11 +4,7 @@ import CardTarea from "../services/CardTarea";
 const Inicio = () => {
   const { tareas } = useAppContext();
   return (
-<<<<<<< HEAD
-    <section className="space-y-8 animate-fadeIn max-w-5xl mx-auto px-4 py-6">
-=======
     <section className="w-full min-h-screen space-y-8 animate-fadeIn py-6 px-0">
->>>>>>> dev
       {/* Encabezado con estilo moderno */}
       <div className="flex flex-col md:flex-row md:items-center justify-between border-b border-zinc-800 pb-5 gap-4 text-center">
         <div className="w-full flex flex-col items-center justify-center mb-8 gap-2">
@@ -25,11 +21,7 @@ const Inicio = () => {
         </div>
       </div>
      {tareas.length > 0 ? (
-<<<<<<< HEAD
-        <div className="w-full flex flex-col gap-4">
-=======
         <div className="w-full flex flex-col gap-2">
->>>>>>> dev
           {tareas.map((tarea) => (
             <CardTarea key={tarea.id} tarea={tarea} />
           ))}
