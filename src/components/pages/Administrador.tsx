@@ -15,7 +15,7 @@ const Administrador = () => {
             Panel de Administración
           </h1>
           <p className="text-zinc-500 text-sm">
-            Gestiona el catálogo de tareas disponibles.
+            Gestiona las tareas a realizar
           </p>
         </div>
         <Link
