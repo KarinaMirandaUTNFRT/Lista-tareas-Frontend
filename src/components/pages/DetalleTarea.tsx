@@ -42,7 +42,7 @@ const DetalleTarea = () => {
     const { buscarTarea } = useAppContext();
     const navigate = useNavigate();
 
-    const config = configuracionCategorias[tarea?.categoria] || configuracionCategorias.Defecto;
+    const config = configuracionCategorias[tarea.categoria || "Defecto"] || configuracionCategorias.Defecto;
     const IconoCategoria = config.Icono;
 
     // Buscar el tarea por id
