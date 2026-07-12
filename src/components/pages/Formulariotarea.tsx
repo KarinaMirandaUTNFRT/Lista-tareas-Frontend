@@ -143,14 +143,8 @@ const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
                 placeholder="Ej: 2026-10-05"
                 className={inputClass(!!errors.fecha)}
                 {...register("fecha", {
-<<<<<<< HEAD
-                  required: "la fecha es obligatoria",
-                 
-                })}
-=======
                   required: "La fecha es obligatoria",
                })}
->>>>>>> dev
               />
               <p className="text-red-500 text-xs mt-1 italic">
                 {errors.fecha?.message}
@@ -191,37 +185,7 @@ const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
                 {errors.categoria?.message}
               </p>
             </div>
-<<<<<<< HEAD
-
-            {/* URL Imagen */}
-            <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-zinc-300 mb-2">
-                Identificador Visual de Área
-              </label>
-              {areaSeleccionada && iconosPorArea[areaSeleccionada] ? (
-                (() => {
-                  const { Icono, color } = iconosPorArea[areaSeleccionada];
-                  return (
-                    <div
-                      className={`w-full h-13 rounded-lg border flex items-center justify-center gap-3 transition-all duration-300 ${color}`}
-                    >
-                      <Icono className="w-6 h-6 animate-pulse" />
-                      <span className="text-sm font-semibold uppercase tracking-wider text-zinc-200">
-                        Ícono de {areaSeleccionada} Vinculado
-                      </span>
-                    </div>
-                  );
-                })()
-              ) : (
-                <div className="w-full h-13 rounded-lg border border-dashed border-zinc-700 bg-zinc-950/40 flex items-center justify-center text-sm text-zinc-500 italic select-none">
-                  Selecciona una categoría arriba para vincular su ícono
-                  automáticamente
-                </div>
-              )}
-            </div>
-=======
             
->>>>>>> dev
 
             {/* Descripción */}
             <div className="md:col-span-2">
