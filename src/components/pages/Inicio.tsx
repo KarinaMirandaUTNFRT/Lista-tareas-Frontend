@@ -4,15 +4,15 @@ import CardTarea from "../services/CardTarea";
 const Inicio = () => {
   const { tareas } = useAppContext();
   return (
-    <section className="space-y-8 animate-fadeIn">
+    <section className="space-y-8 animate-fadeIn text-center">
       {/* Encabezado con estilo moderno */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between border-b border-zinc-800 pb-5 gap-4">
-        <div>
-          <h1 className="text-3xl font-bold text-white tracking-tight">
-            Catálogo de <span className="text-blue-500">Tareas</span>
+      <div className="flex flex-col md:flex-row md:items-center justify-between border-b border-zinc-800 pb-5 gap-4 text-center">
+        <div className="w-full flex flex-col items-center justify-center mb-8 gap-2">
+          <h1 className="text-3xl font-bold text-white tracking-tight text-center">
+            Lista de  <span className="text-blue-500">Tareas</span>
           </h1>
-          <p className="text-zinc-400 mt-1 text-sm">
-            Explora nuestras soluciones tecnológicas personalizadas.
+          <p className="text-zinc-400 mt-1 text-sm text-center">
+            Tareas para el mes de Agosto de 2026
           </p>
         </div>
 

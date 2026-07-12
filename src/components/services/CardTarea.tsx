@@ -78,7 +78,7 @@ const CardTarea = ({ tarea }: CardTareaProps) => {
         {/* Bloque de Fecha Límite */}
         <div className="flex flex-col text-left md:text-right gap-0.5">
           <span className="text-[10px] uppercase font-bold tracking-wider text-zinc-500 select-none">
-            Entrega límite
+            Fecha de entrega límite
           </span>
           <div className="text-sm text-zinc-400 font-mono">
             {tarea.fecha ? (
