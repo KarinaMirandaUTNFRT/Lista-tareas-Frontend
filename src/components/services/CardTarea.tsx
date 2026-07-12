@@ -43,56 +43,56 @@ const configuracionCategorias: Record<
     Icono: MdDataUsage,
   },
 };
-
 const CardTarea = ({ tarea }: CardTareaProps) => {
-  const config = configuracionCategorias[tarea.categoria] || configuracionCategorias.Defecto;
+  const config =
+    configuracionCategorias[tarea.categoria] || configuracionCategorias.Defecto;
   const IconoCategoria = config.Icono;
 
   return (
-    <article className="group w-full bg-zinc-900 rounded-xl border border-zinc-800 hover:border-blue-500/40 transition-all duration-300 shadow-lg flex flex-col md:flex-row items-center p-4 gap-5">
-      
-      {/* 🟢 1. CONTENEDOR DEL ÍCONO COMPACTO */}
-      <div className={`w-16 h-16 shrink-0 rounded-xl border flex items-center justify-center transition-colors duration-300 ${config.clasesFondo}`}>
+    <article
+      className="group w-full bg-zinc-900 rounded-xl border border-zinc-800 hover:border-blue-500/40 
+    transition-all duration-300 shadow-lg flex flex-col md:flex-row items-center p-4 gap-5"
+    >
+      <div
+        className={`w-16 h-16 shrink-0 rounded-xl border flex items-center justify-center transition-colors duration-300 ${config.clasesFondo}`}
+      >
         <IconoCategoria className="w-8 h-8 transition-transform duration-500 group-hover:scale-110" />
       </div>
-
-      {/* 📝 2. CUERPO DE TEXTOS (Título, categoría y descripción en una sola línea) */}
-      <div className="flex flex-col grow min-w-0 w-full md:w-auto">
-        <div className="flex items-center gap-3 flex-wrap mb-1">
-          <h3 className="text-lg font-bold text-zinc-100 group-hover:text-blue-400 transition-colors truncate">
-            {tarea.nombreTarea}
-          </h3>
-          <span className="bg-zinc-950/80 backdrop-blur-sm text-blue-400 text-[10px] font-bold px-2 py-0.5 rounded border border-zinc-800 uppercase tracking-wider">
+      <div className="flex flex-col lg:flex-row grow min-w-0 w-full md:w-auto gap-2 lg:gap-8 items-start lg:items-center">
+        <div className="flex items-center gap-2 shrink-0">
+          <span className="text-[11px] uppercase font-bold tracking-wider text-zinc-500 select-none whitespace-nowrap">
+            Área responsable:
+          </span>
+          <span className="text-sm font-semibold text-blue-400 uppercase tracking-wide">
             {tarea.categoria}
           </span>
         </div>
-
-        
+        <span className="hidden lg:inline text-zinc-700">|</span>
+        <div className="flex items-center gap-2 min-w-0 grow">
+          <span className="text-[11px] uppercase font-bold tracking-wider text-zinc-500 select-none whitespace-nowrap">
+            Tarea a realizar:
+          </span>
+          <h3 className="text-base font-bold text-zinc-100 group-hover:text-blue-400 transition-colors truncate">
+            {tarea.nombreTarea}
+          </h3>
+        </div>
       </div>
-
-      {/* 🗓️ 3. BLOQUE DE ACCIONES (Fecha límite con su frase fija y el botón) */}
       <div className="flex items-center justify-between md:justify-end gap-6 w-full md:w-auto shrink-0 border-t md:border-t-0 border-zinc-800/60 pt-3 md:pt-0">
-        
-        {/* Bloque de Fecha Límite */}
         <div className="flex flex-col text-left md:text-right gap-0.5">
           <span className="text-[10px] uppercase font-bold tracking-wider text-zinc-500 select-none">
             Fecha de entrega límite
           </span>
           <div className="text-sm text-zinc-400 font-mono">
-            {tarea.fecha ? (
-              (() => {
-                const fechaObj = new Date(tarea.fecha);
-                return !isNaN(fechaObj.getTime())
-                  ? fechaObj.toLocaleDateString("es-AR", { timeZone: "UTC" })
-                  : "Sin fecha";
-              })()
-            ) : (
-              "Sin fecha"
-            )}
+            {tarea.fecha
+              ? (() => {
+                  const fechaObj = new Date(tarea.fecha);
+                  return !isNaN(fechaObj.getTime())
+                    ? fechaObj.toLocaleDateString("es-AR", { timeZone: "UTC" })
+                    : "Sin fecha";
+                })()
+              : "Sin fecha"}
           </div>
         </div>
-
-        {/* Botón Ver Detalle */}
         <Link
           to={`tarea/${tarea.id}`}
           className="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg text-sm font-bold transition-colors shadow-md shadow-blue-900/20 active:scale-95 whitespace-nowrap"
@@ -100,9 +100,7 @@ const CardTarea = ({ tarea }: CardTareaProps) => {
           Ver detalle
         </Link>
       </div>
-
     </article>
   );
 };
-
 export default CardTarea;
