@@ -3,7 +3,7 @@ import Administrador from "./components/pages/Administrador";
 import FormularioTarea from "./components/pages/Formulariotarea";
 import Login from "./components/pages/Login";
 import DetalleTarea from "./components/pages/DetalleTarea";
-import Footer from "./components/shared/Footer";
+import Footer from "./components/shared/footer";
 import Menu from "./components/shared/Menu";
 import { BrowserRouter, Routes, Route } from "react-router";
 import ProtectorRutas from "./components/routes/ProtectorRutas";

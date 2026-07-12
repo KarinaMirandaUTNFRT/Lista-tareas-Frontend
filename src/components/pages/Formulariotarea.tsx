@@ -143,9 +143,14 @@ const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
                 placeholder="Ej: 2026-10-05"
                 className={inputClass(!!errors.fecha)}
                 {...register("fecha", {
+<<<<<<< HEAD
                   required: "la fecha es obligatoria",
                  
                 })}
+=======
+                  required: "La fecha es obligatoria",
+               })}
+>>>>>>> dev
               />
               <p className="text-red-500 text-xs mt-1 italic">
                 {errors.fecha?.message}
@@ -186,6 +191,7 @@ const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
                 {errors.categoria?.message}
               </p>
             </div>
+<<<<<<< HEAD
 
             {/* URL Imagen */}
             <div className="md:col-span-2">
@@ -213,6 +219,9 @@ const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
                 </div>
               )}
             </div>
+=======
+            
+>>>>>>> dev
 
             {/* Descripción */}
             <div className="md:col-span-2">

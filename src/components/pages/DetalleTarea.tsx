@@ -1,4 +1,4 @@
-import { useParams, useNavigate, Link } from "react-router";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { useAppContext } from "../../context/AppContext";
 import { useEffect } from "react";
 import { 
@@ -61,8 +61,13 @@ const DetalleTarea = () => {
 
 
     return (
-        <div className="max-w-xl mx-auto bg-zinc-900 rounded-lg shadow-lg p-8 mt-8">
+        <div className="text-center max-w-xl mx-auto bg-zinc-900 rounded-lg shadow-lg p-8 mt-8">
+          <span className="text-center text-[30px] uppercase font-bold tracking-wider text-zinc-500 select-none mb-1">
+                    Tarea a realizar:
+                </span>
+
             <h2 className="text-3xl font-bold mb-4 text-center">{tarea.nombreTarea}</h2>
+<<<<<<< HEAD
             <div className={`w-full h-64 rounded-lg border flex items-center justify-center mb-6 transition-all duration-300 ${config.clasesFondo}`}>
       <IconoCategoria className="w-24 h-24 stroke-[1.2]" />
     </div>
@@ -84,6 +89,18 @@ const DetalleTarea = () => {
       {tarea.descripcion || "Sin descripción disponible."}
     </p>
 <div className="border-t border-zinc-800 pt-6"></div>
+=======
+            
+            <p className="text-lg mb-2">
+                <span className="font-semibold">Fecha Limite:</span> {tarea.fecha.toLocaleString("es-AR")}
+            </p>
+            <p className="text-lg mb-2">
+                <span className="font-semibold">Area Responsable:</span> {tarea.categoria}
+            </p>
+            <p className="mb-4">
+                <span className="font-semibold">Descripción:</span> {tarea.descripcion}
+            </p>
+>>>>>>> dev
             <Link
                 to="/"
                 className="inline-block bg-zinc-800 hover:bg-zinc-700 text-zinc-200 px-5 py-2.5 rounded-lg text-sm font-semibold transition-colors active:scale-95"
