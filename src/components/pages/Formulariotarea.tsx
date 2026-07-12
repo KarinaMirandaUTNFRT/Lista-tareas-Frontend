@@ -48,6 +48,7 @@ const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
   } = useForm<TareaFormData>();
 
   const areaSeleccionada = watch("categoria");
+  const prioridadSeleccionada = watch("prioridad");
 
   // traigo los datos que necesito del contexto
   const { crearTarea, buscarTarea, editarTarea } = useAppContext();
@@ -63,7 +64,7 @@ const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
         setValue("fecha", tareaBuscada.fecha);
         setValue("categoria", tareaBuscada.categoria);
         setValue("descripcion", tareaBuscada.descripcion);
-        setValue("imagen", tareaBuscada.imagen);
+        setValue("prioridad", tareaBuscada.prioridad);
       }
     }
   }, [id, titulo, buscarTarea, setValue]);
@@ -144,7 +145,7 @@ const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
                 className={inputClass(!!errors.fecha)}
                 {...register("fecha", {
                   required: "La fecha es obligatoria",
-               })}
+                })}
               />
               <p className="text-red-500 text-xs mt-1 italic">
                 {errors.fecha?.message}
@@ -185,7 +186,34 @@ const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
                 {errors.categoria?.message}
               </p>
             </div>
-            
+
+            <div>
+              <label className="block text-sm font-medium text-zinc-300 mb-2">
+                Prioridad*
+              </label>
+              <select
+                className={inputClass(!!errors.prioridad)}
+                {...register("prioridad", {
+                  required: "Seleccione un estado",
+                })}
+              >
+                <option value="" className="bg-zinc-900">
+                  Seleccione una opción
+                </option>
+                <option value="alta" className="bg-zinc-900">
+                  Alta
+                </option>
+                <option value="media" className="bg-zinc-900">
+                  Media
+                </option>
+                <option value="baja" className="bg-zinc-900">
+                  Baja
+                </option>
+              </select>
+              <p className="text-red-500 text-xs mt-1 italic">
+                {errors.prioridad?.message}
+              </p>
+            </div>
 
             {/* Descripción */}
             <div className="md:col-span-2">
