@@ -48,14 +48,17 @@ const CardTarea = ({ tarea }: CardTareaProps) => {
   const config =
     configuracionCategorias[tarea.categoria] || configuracionCategorias.Defecto;
   const IconoCategoria = config.Icono;
-
  const [realizada, setRealizada] = useState<boolean>(false);
-  
+
  return (
     <article
-      className="group w-full bg-zinc-900 rounded-xl border border-zinc-800 hover:border-blue-500/40 
-    transition-all duration-300 shadow-lg flex flex-col md:flex-row items-center p-4 gap-5"
+      className={`group w-full bg-zinc-900 rounded-xl border transition-all duration-300 shadow-lg flex flex-col md:flex-row items-center p-4 gap-5 ${
+      realizada 
+          ? "border-emerald-500/50 shadow-emerald-950/10" 
+          : "border-zinc-800 hover:border-red-500/40"
+      }`}
     >
+
       <div
         className={`w-16 h-16 shrink-0 rounded-xl border flex items-center justify-center transition-colors duration-300 ${config.clasesFondo}`}
       >
@@ -96,16 +99,18 @@ const CardTarea = ({ tarea }: CardTareaProps) => {
               : "Sin fecha"}
           </div>
         </div>
-        <button
-          onClick={() => setRealizada(!realizada)}
+          <button
+          onClick={() => setRealizada(!realizada)} // Al hacer clic, invierte el valor (true/false)
           className={`px-4 py-2 rounded-lg text-sm font-bold transition-all active:scale-95 whitespace-nowrap cursor-pointer border ${
             realizada
-              ? "border-emerald-500 bg-emerald-600 text-white hover:bg-emerald-700"
-              : "border-red-500/40 hover:border-red-500 bg-transparent text-red-400 hover:bg-red-600 hover:text-white"
+              ? "border-emerald-500 bg-emerald-600 text-white hover:bg-emerald-700" // Estilo Verde (Hecho)
+              : "border-red-500/40 hover:border-red-500 bg-transparent text-red-400 hover:bg-red-600 hover:text-white" // Estilo Rojo (Pendiente)
           }`}
         >
           {realizada ? "✓ Realizada" : "Marcar realizada"}
         </button>
+
+
         <Link
           to={`tarea/${tarea.id}`}
           className="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg text-sm font-bold transition-colors shadow-md shadow-blue-900/20 active:scale-95 whitespace-nowrap"
