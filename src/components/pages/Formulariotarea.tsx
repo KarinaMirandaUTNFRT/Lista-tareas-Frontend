@@ -48,6 +48,7 @@ const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
   } = useForm<TareaFormData>();
 
   const areaSeleccionada = watch("categoria");
+  const prioridadSeleccionada = watch("prioridad");
 
   // traigo los datos que necesito del contexto
   const { crearTarea, buscarTarea, editarTarea } = useAppContext();
@@ -199,13 +200,13 @@ const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
                 <option value="" className="bg-zinc-900">
                   Seleccione una opción
                 </option>
-                <option value="Ventas" className="bg-zinc-900">
+                <option value="alta" className="bg-zinc-900">
                   Alta
                 </option>
-                <option value="Proveedores" className="bg-zinc-900">
+                <option value="media" className="bg-zinc-900">
                   Media
                 </option>
-                <option value="Marketing" className="bg-zinc-900">
+                <option value="baja" className="bg-zinc-900">
                   Baja
                 </option>
                  </select>
@@ -213,6 +214,7 @@ const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
                 {errors.prioridad?.message}
               </p>
             </div>
+
 
             {/* Descripción */}
             <div className="md:col-span-2">
