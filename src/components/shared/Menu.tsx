@@ -28,7 +28,7 @@ const Menu = () => {
           <div className="shrink-0 flex items-center gap-2 text-xl tracking-wider">
             <LuCodeXml className="text-blue-500 text-2xl" />
             <Link to={"/"} className="font-bold uppercase">
-              MI EMPRESA {" "}
+              MI EMPRESA SRL {" "}
             </Link>
           </div>
 
