@@ -67,9 +67,7 @@ const CardTarea = ({ tarea }: CardTareaProps) => {
           </span>
         </div>
 
-        <p className="text-zinc-400 text-sm line-clamp-1">
-          {tarea.descripcion}
-        </p>
+        
       </div>
 
       {/* 🗓️ 3. BLOQUE DE ACCIONES (Fecha límite con su frase fija y el botón) */}
