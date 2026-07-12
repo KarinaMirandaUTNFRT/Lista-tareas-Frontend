@@ -145,7 +145,7 @@ const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
                 className={inputClass(!!errors.fecha)}
                 {...register("fecha", {
                   required: "La fecha es obligatoria",
-               })}
+                })}
               />
               <p className="text-red-500 text-xs mt-1 italic">
                 {errors.fecha?.message}
@@ -209,12 +209,11 @@ const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
                 <option value="baja" className="bg-zinc-900">
                   Baja
                 </option>
-                 </select>
+              </select>
               <p className="text-red-500 text-xs mt-1 italic">
                 {errors.prioridad?.message}
               </p>
             </div>
-
 
             {/* Descripción */}
             <div className="md:col-span-2">
