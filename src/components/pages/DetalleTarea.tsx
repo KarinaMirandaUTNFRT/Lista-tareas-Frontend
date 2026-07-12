@@ -86,7 +86,7 @@ const DetalleTarea = () => {
         {tarea.categoria}
       </p>
       <p className="text-lg mb-2 text-zinc-300">
-        <span className="font-semibold">Area Responsable:</span>{" "}
+        <span className="font-semibold">Prioridad:</span>{" "}
         {tarea.prioridad}
       </p>
       <p className="mb-6 text-zinc-300">
