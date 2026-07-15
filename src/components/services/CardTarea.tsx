@@ -1,52 +1,15 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import type { Tarea } from "../../interfaces/tareas";
-
-import {
-  MdOutlineDesktopWindows,
-  MdOutlineAssignmentInd,
-  MdOutlineDashboard,
-  MdOutlineCellTower,
-  MdConnectWithoutContact,
-  MdDataUsage,
-} from "react-icons/md";
+import { obtenerConfiguracionCategoria } from "../../helpers/categorias";
+import { formatearFechaLarga } from "../../helpers/fecha";
 
 interface CardTareaProps {
   tarea: Tarea;
 }
 
-const configuracionCategorias: Record<
-  string,
-  { clasesFondo: string; Icono: any }
-> = {
-  Ventas: {
-    clasesFondo: "bg-emerald-950/40 border-emerald-500/20 text-emerald-400",
-    Icono: MdOutlineDesktopWindows,
-  },
-  Proveedores: {
-    clasesFondo: "bg-amber-950/40 border-amber-500/20 text-amber-400",
-    Icono: MdOutlineAssignmentInd,
-  },
-  Marketing: {
-    clasesFondo: "bg-purple-950/40 border-purple-500/20 text-purple-400",
-    Icono: MdOutlineDashboard,
-  },
-  Sistemas: {
-    clasesFondo: "bg-blue-950/40 border-blue-500/20 text-blue-400",
-    Icono: MdOutlineCellTower,
-  },
-  "Atencion al Cliente": {
-    clasesFondo: "bg-pink-950/40 border-pink-500/20 text-pink-400",
-    Icono: MdConnectWithoutContact,
-  },
-  Defecto: {
-    clasesFondo: "bg-zinc-800 border-zinc-700 text-zinc-400",
-    Icono: MdDataUsage,
-  },
-};
 const CardTarea = ({ tarea }: CardTareaProps) => {
-  const config =
-    configuracionCategorias[tarea.categoria] || configuracionCategorias.Defecto;
+  const config = obtenerConfiguracionCategoria(tarea.categoria);
   const IconoCategoria = config.Icono;
  const [realizada, setRealizada] = useState<boolean>(false);
 
@@ -89,14 +52,7 @@ const CardTarea = ({ tarea }: CardTareaProps) => {
             Fecha de entrega límite
           </span>
           <div className="text-sm text-zinc-400 font-mono">
-            {tarea.fecha
-              ? (() => {
-                  const fechaObj = new Date(tarea.fecha);
-                  return !isNaN(fechaObj.getTime())
-                    ? fechaObj.toLocaleDateString("es-AR", { timeZone: "UTC" })
-                    : "Sin fecha";
-                })()
-              : "Sin fecha"}
+            {formatearFechaLarga(tarea.fecha)}
           </div>
         </div>
           <button

@@ -1,44 +1,8 @@
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { useAppContext } from "../../context/AppContext";
 import { useEffect } from "react";
-import {
-  MdOutlineDesktopWindows,
-  MdOutlineAssignmentInd,
-  MdOutlineDashboard,
-  MdOutlineCellTower,
-  MdConnectWithoutContact,
-  MdDataUsage,
-} from "react-icons/md";
-
-const configuracionCategorias: Record<
-  string,
-  { clasesFondo: string; Icono: any }
-> = {
-  Ventas: {
-    clasesFondo: "bg-emerald-950/40 border-emerald-500/20 text-emerald-400",
-    Icono: MdOutlineDesktopWindows,
-  },
-  Proveedores: {
-    clasesFondo: "bg-amber-950/40 border-amber-500/20 text-amber-400",
-    Icono: MdOutlineAssignmentInd,
-  },
-  Marketing: {
-    clasesFondo: "bg-purple-950/40 border-purple-500/20 text-purple-400",
-    Icono: MdOutlineDashboard,
-  },
-  Sistemas: {
-    clasesFondo: "bg-blue-950/40 border-blue-500/20 text-blue-400",
-    Icono: MdOutlineCellTower,
-  },
-  "Atencion al Cliente": {
-    clasesFondo: "bg-pink-950/40 border-pink-500/20 text-pink-400",
-    Icono: MdConnectWithoutContact,
-  },
-  Defecto: {
-    clasesFondo: "bg-zinc-800 border-zinc-700 text-zinc-400",
-    Icono: MdDataUsage,
-  },
-};
+import { obtenerConfiguracionCategoria } from "../../helpers/categorias";
+import { formatearFecha } from "../../helpers/fecha";
 
 const DetalleTarea = () => {
   const { id } = useParams<{ id: string }>();
@@ -59,9 +23,7 @@ const DetalleTarea = () => {
     return null;
   }
 
-  const config =
-    configuracionCategorias[tarea?.categoria || "Defecto"] ||
-    configuracionCategorias.Defecto;
+  const config = obtenerConfiguracionCategoria(tarea?.categoria);
   const IconoCategoria = config.Icono;
 
   return (
@@ -76,9 +38,7 @@ const DetalleTarea = () => {
 
       <p className="text-lg mb-2 text-zinc-300">
         <span className="font-semibold text-zinc-400">Fecha Límite:</span>{" "}
-        {tarea.fecha
-          ? String(tarea.fecha).split("-").reverse().join("/")
-          : "Sin fecha"}
+        {formatearFecha(tarea.fecha)}
       </p>
 
       <p className="text-lg mb-2 text-zinc-300">
