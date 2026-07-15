@@ -12,25 +12,49 @@ import { AppContext } from "./context/AppContext";
 import type { tarea, tareaFormData } from "./interfaces/tareas";
 import Error404 from "./components/pages/Error404";
 
+function leerStorage<T>(
+  storage: Storage,
+  clave: string,
+  valorPorDefecto: T,
+): T {
+  const guardado = storage.getItem(clave);
+  if (guardado === null) {
+    return valorPorDefecto;
+  }
+  try {
+    return JSON.parse(guardado) as T;
+  } catch (error) {
+    console.error(
+      `No se pudo leer "${clave}" del almacenamiento, se usará el valor por defecto`,
+      error,
+    );
+    return valorPorDefecto;
+  }
+}
+
 function App() {
-  const usuarioSessionStorage = JSON.parse(
-    sessionStorage.getItem("usuarioKey") || "false",
-  );
-  const [usuarioLogueado, setUsuarioLogueado] = useState<boolean>(
-    usuarioSessionStorage,
+  const [usuarioLogueado, setUsuarioLogueado] = useState<boolean>(() =>
+    leerStorage<boolean>(sessionStorage, "usuarioKey", false),
   );
   // agregamos los tareas
-  const tareasLocalStorage = JSON.parse(
-    localStorage.getItem("tareasKey") || "[]",
+  const [tareas, setTareas] = useState<tarea[]>(() =>
+    leerStorage<tarea[]>(localStorage, "tareasKey", []),
   );
-  const [tareas, setTareas] = useState<tarea[]>(tareasLocalStorage);
 
   useEffect(() => {
-    sessionStorage.setItem("usuarioKey", JSON.stringify(usuarioLogueado));
+    try {
+      sessionStorage.setItem("usuarioKey", JSON.stringify(usuarioLogueado));
+    } catch (error) {
+      console.error("No se pudo guardar la sesión del usuario", error);
+    }
   }, [usuarioLogueado]);
 
   useEffect(() => {
-    localStorage.setItem("tareasKey", JSON.stringify(tareas));
+    try {
+      localStorage.setItem("tareasKey", JSON.stringify(tareas));
+    } catch (error) {
+      console.error("No se pudieron guardar las tareas", error);
+    }
   }, [tareas]);
 
   // logicar para trabajar con los sercicios
