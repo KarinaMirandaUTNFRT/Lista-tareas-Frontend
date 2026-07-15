@@ -18,7 +18,6 @@ const Login = () => {
   const navegacion = useNavigate();
 
   const onSubmit = (data: LoginFormInputs) => {
-    console.log(data);
     //1- si los datos del formulario son correctos y coinciden con las credenciales del admin loguear al usuario
     if (
       data.email === import.meta.env.VITE_EMAIL &&
