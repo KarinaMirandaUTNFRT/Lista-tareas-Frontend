@@ -1,8 +1,9 @@
 import { Link } from "react-router";
 import type { Tarea } from "../../interfaces/tareas";
-import Swal from "sweetalert2";
 import { useAppContext } from "../../context/AppContext";
 import { LuTrash2,LuPencil  } from "react-icons/lu";
+import { alertaConfirmacion, alertaExito } from "../../helpers/alertas";
+import { formatearFecha } from "../../helpers/fecha";
 
 interface ItemTablaProps {
   tarea: Tarea;
@@ -13,28 +14,13 @@ const ItemTabla = ({ tarea, fila }: ItemTablaProps) => {
   const { borrarTarea } = useAppContext();
 
   const eliminarTarea = () => {
-    Swal.fire({
-      title: "¿Estás seguro?",
-      text: "No se puede revertir este proceso",
-      icon: "warning",
-      background: "#18181b", // zinc-900
-      color: "#f4f4f5", // zinc-100
-      showCancelButton: true,
-      confirmButtonColor: "#3b82f6", // blue-500
-      cancelButtonColor: "#ef4444", // red-500
-      confirmButtonText: "Sí, borrar",
-      cancelButtonText: "Cancelar",
-    }).then((result) => {
+    alertaConfirmacion(
+      "¿Estás seguro?",
+      "No se puede revertir este proceso",
+    ).then((result) => {
       if (result.isConfirmed) {
         borrarTarea(tarea.id);
-        Swal.fire({
-          title: "Eliminado",
-          text: `El tarea fue eliminado correctamente`,
-          icon: "success",
-          background: "#18181b",
-          color: "#f4f4f5",
-          confirmButtonColor: "#3b82f6",
-        });
+        alertaExito("Eliminado", "El tarea fue eliminado correctamente");
       }
     });
   };
@@ -48,7 +34,7 @@ const ItemTabla = ({ tarea, fila }: ItemTablaProps) => {
         {tarea.nombreTarea}
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-sm text-zinc-400 font-mono">
-        {tarea.fecha? String(tarea.fecha).split("-").reverse().join("/"): "Sin fecha"}
+        {formatearFecha(tarea.fecha)}
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
         <div className="flex gap-3">

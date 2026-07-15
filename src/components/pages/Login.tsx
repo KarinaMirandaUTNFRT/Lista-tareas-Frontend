@@ -1,7 +1,8 @@
 import { useForm } from "react-hook-form";
 import { useAppContext } from "../../context/AppContext";
 import { useNavigate } from "react-router";
-import Swal from "sweetalert2";
+import { alertaExito, alertaError } from "../../helpers/alertas";
+import { inputClass } from "../../helpers/estilos";
 
 interface LoginFormInputs {
   email: string;
@@ -25,25 +26,11 @@ const Login = () => {
       data.password === import.meta.env.VITE_PASSWORD
     ) {
       setUsuarioLogueado(true);
-      Swal.fire({
-        title: "Bienvenido Administrador",
-        text: "Ingresando al sistema",
-        icon: "success",
-        background: "#18181b",
-        color: "#f4f4f5",
-        confirmButtonColor: "#3b82f6",
-      });
+      alertaExito("Bienvenido Administrador", "Ingresando al sistema");
       //redirecciono al admin
       navegacion("/administrador");
     } else {
-      Swal.fire({
-        title: "Ocurrió un error",
-        text: "Credenciales incorrectas",
-        icon: "error",
-        background: "#18181b",
-        color: "#f4f4f5",
-        confirmButtonColor: "#ef4444",
-      });
+      alertaError("Ocurrió un error", "Credenciales incorrectas");
     }
   };
 
@@ -74,7 +61,7 @@ const Login = () => {
                 id="email"
                 type="email"
                 autoComplete="email"
-                className={`w-full px-4 py-3 bg-zinc-950 border ${errors.email ? "border-red-500" : "border-zinc-700"} rounded-lg text-zinc-100 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all`}
+                className={inputClass(!!errors.email, "py-3")}
                 placeholder="correo@dominio.com"
                 {...register("email", {
                   required: "El email es obligatorio",
@@ -102,7 +89,7 @@ const Login = () => {
                 id="password"
                 type="password"
                 autoComplete="current-password"
-                className={`w-full px-4 py-3 bg-zinc-950 border ${errors.password ? "border-red-500" : "border-zinc-700"} rounded-lg text-zinc-100 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all`}
+                className={inputClass(!!errors.password, "py-3")}
                 placeholder="••••••••"
                 {...register("password", {
                   required: "La contraseña es obligatoria",

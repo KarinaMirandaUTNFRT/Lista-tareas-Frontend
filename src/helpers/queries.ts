@@ -1,65 +1,39 @@
 import type { tarea } from "../interfaces/tareas";
 
-const urlTareas = import.meta.env.VITE_SERVICIO
+const urlTareas = import.meta.env.VITE_SERVICIO;
 
-export const listarTareasApi = async ():Promise<Response> =>{
-    try{
-        const respuesta = await fetch(urlTareas)
-        return respuesta
-    }catch(error){
-        console.error(error)
-        throw error
-    }
-};
+const jsonHeaders = { "Content-Type": "application/json" };
 
-export const buscarTareaApi = async (id:string):Promise<Response> =>{
-    try{
-        const respuesta = await fetch(`${urlTareas}/${id}`)
-        return respuesta
-    }catch(error){
-        console.error(error)
-        throw error
-    }
+const peticionApi = async (
+  url: string,
+  opciones?: RequestInit,
+): Promise<Response> => {
+  try {
+    return await fetch(url, opciones);
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 };
 
-export const crearTareaApi = async (tarea: tarea):Promise<Response> =>{
-    try{
-        const respuesta = await fetch(urlTareas, {
-            method: 'POST',
-            headers:{
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(tarea)
-        })
-        return respuesta
-    }catch(error){
-        console.error(error)
-        throw error
-    }
-};
-export const editarTareaApi = async (id:string, tarea: tarea):Promise<Response> =>{
-    try{
-        const respuesta = await fetch(`${urlTareas}/${id}`, {
-            method: 'PUT',
-            headers:{
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(tarea)
-        })
-        return respuesta
-    }catch(error){
-        console.error(error)
-        throw error
-    }
-};
-export const borrarTareaApi = async (id:string):Promise<Response> =>{
-    try{
-        const respuesta = await fetch(`${urlTareas}/${id}`, {
-            method: 'DELETE'
-        })
-        return respuesta
-    }catch(error){
-        console.error(error)
-        throw error
-    }
-};
+export const listarTareasApi = (): Promise<Response> => peticionApi(urlTareas);
+
+export const buscarTareaApi = (id: string): Promise<Response> =>
+  peticionApi(`${urlTareas}/${id}`);
+
+export const crearTareaApi = (tarea: tarea): Promise<Response> =>
+  peticionApi(urlTareas, {
+    method: "POST",
+    headers: jsonHeaders,
+    body: JSON.stringify(tarea),
+  });
+
+export const editarTareaApi = (id: string, tarea: tarea): Promise<Response> =>
+  peticionApi(`${urlTareas}/${id}`, {
+    method: "PUT",
+    headers: jsonHeaders,
+    body: JSON.stringify(tarea),
+  });
+
+export const borrarTareaApi = (id: string): Promise<Response> =>
+  peticionApi(`${urlTareas}/${id}`, { method: "DELETE" });

@@ -1,43 +1,14 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
 import type { TareaFormData } from "../../interfaces/tareas";
 import { useAppContext } from "../../context/AppContext";
-import Swal from "sweetalert2";
 import { useNavigate, useParams } from "react-router";
 import { useEffect } from "react";
-import {
-  MdOutlineDesktopWindows,
-  MdOutlineAssignmentInd,
-  MdOutlineDashboard,
-  MdOutlineCellTower,
-  MdConnectWithoutContact,
-  MdDataUsage,
-} from "react-icons/md";
+import { alertaExito } from "../../helpers/alertas";
+import { inputClass } from "../../helpers/estilos";
 
 interface FormularioTareaProps {
   titulo: string;
 }
-const iconosPorArea: Record<string, { Icono: any; color: string }> = {
-  Ventas: {
-    Icono: MdOutlineDesktopWindows,
-    color: "text-emerald-400 bg-emerald-950/30 border-emerald-500/20",
-  },
-  Proveedores: {
-    Icono: MdOutlineAssignmentInd,
-    color: "text-amber-400 bg-amber-950/30 border-amber-500/20",
-  },
-  Marketing: {
-    Icono: MdOutlineDashboard,
-    color: "text-purple-400 bg-purple-950/30 border-purple-500/20",
-  },
-  Sistemas: {
-    Icono: MdOutlineCellTower,
-    color: "text-blue-400 bg-blue-950/30 border-blue-500/20",
-  },
-  "Atencion al Cliente": {
-    Icono: MdConnectWithoutContact,
-    color: "text-pink-400 bg-pink-950/30 border-pink-500/20",
-  },
-};
 const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
   const {
     register,
@@ -73,37 +44,22 @@ const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
     const datosConImagen = { ...data, imagen: "" };
     if (titulo.includes("Crear") && crearTarea) {
       crearTarea(data);
-      Swal.fire({
-        title: "Tarea creada",
-        text: `La Tarea '${data.nombreTarea}' fue creado correctamente`,
-        icon: "success",
-        background: "#18181b",
-        color: "#f4f4f5",
-        confirmButtonColor: "#3b82f6",
-      });
+      alertaExito(
+        "Tarea creada",
+        `La Tarea '${data.nombreTarea}' fue creado correctamente`,
+      );
       if (e) {
         (e.target as HTMLFormElement).reset();
       }
     } else if (id && editarTarea) {
       editarTarea(id, datosConImagen);
-      Swal.fire({
-        title: "Tarea editada",
-        text: `La Tarea '${data.nombreTarea}' fue editado correctamente`,
-        icon: "success",
-        background: "#18181b",
-        color: "#f4f4f5",
-        confirmButtonColor: "#3b82f6",
-      });
+      alertaExito(
+        "Tarea editada",
+        `La Tarea '${data.nombreTarea}' fue editado correctamente`,
+      );
       navegacion("/administrador");
     }
   };
-
-  // Clase utilitaria para inputs
-  const inputClass = (hasError: boolean) => `
-    w-full px-4 py-2.5 bg-zinc-950 border rounded-lg text-zinc-100 
-    focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all
-    ${hasError ? "border-red-500" : "border-zinc-700"}
-  `;
 
   return (
     <section className="max-w-4xl mx-auto animate-fadeIn">
