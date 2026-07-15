@@ -9,7 +9,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ProtectorRutas from "./components/routes/ProtectorRutas";
 import { useEffect, useState } from "react";
 import { AppContext } from "./context/AppContext";
-import type { Tarea, TareaFormData } from "./interfaces/tareas";
+import type { tarea, tareaFormData } from "./interfaces/tareas";
 import Error404 from "./components/pages/Error404";
 
 function App() {
@@ -23,7 +23,7 @@ function App() {
   const tareasLocalStorage = JSON.parse(
     localStorage.getItem("tareasKey") || "[]",
   );
-  const [tareas, setTareas] = useState<Tarea[]>(tareasLocalStorage);
+  const [tareas, setTareas] = useState<tarea[]>(tareasLocalStorage);
 
   useEffect(() => {
     sessionStorage.setItem("usuarioKey", JSON.stringify(usuarioLogueado));
@@ -34,8 +34,8 @@ function App() {
   }, [tareas]);
 
   // logicar para trabajar con los sercicios
-  const crearTarea = (dataTarea: TareaFormData) => {
-    const tareaNuevo: Tarea = {
+  const crearTarea = (dataTarea: tareaFormData) => {
+    const tareaNuevo: tarea = {
       ...dataTarea,
       id: crypto.randomUUID(),
     };
@@ -51,7 +51,7 @@ function App() {
 
   const editarTarea = (
     idTarea: string,
-    tareaEditar: TareaFormData,
+    tareaEditar: tareaFormData,
   ) => {
     const tareasEditados = tareas.map((itemTarea) => {
       if (itemTarea.id === idTarea) {
@@ -62,7 +62,7 @@ function App() {
     setTareas(tareasEditados);
   };
 
-  const buscarTarea = (idTarea: string): Tarea | undefined => {
+  const buscarTarea = (idTarea: string): tarea | undefined => {
     return tareas.find((item) => item.id === idTarea);
   };
 
