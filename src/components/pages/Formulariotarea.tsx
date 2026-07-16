@@ -13,6 +13,12 @@ import {
   MdDataUsage,
 } from "react-icons/md";
 
+import { 
+  buscarTareaApi, 
+  crearTareaApi, 
+  editarTareaApi 
+} from "../../helpers/queries"; 
+
 interface FormularioTareaProps {
   titulo: string;
 }
@@ -57,17 +63,37 @@ const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
   const navegacion = useNavigate();
 
   useEffect(() => {
-    if (titulo.includes("Editar") && id && buscarTareaApi) {
-      const tareaBuscada = buscarTareaApi(id);
-      if (tareaBuscada) {
-        setValue("nombreTarea", tareaBuscada.nombreTarea);
-        setValue("fecha", tareaBuscada.fecha);
-        setValue("categoria", tareaBuscada.categoria);
-        setValue("descripcion", tareaBuscada.descripcion);
-        setValue("prioridad", tareaBuscada.prioridad);
+    const cargarTarea = async () => {
+      if (titulo.includes("Editar") && id && buscarTareaApi) {
+        try {
+          const respuesta = await buscarTareaApi(id);
+          if (respuesta.ok) {
+            // Esperamos a que el JSON se procese
+            const tareaBuscada = await respuesta.json();
+            
+            // Ahora tareaBuscada tiene los datos reales y TypeScript no dará error
+            setValue("nombreTarea", tareaBuscada.nombreTarea);
+            setValue("fecha", tareaBuscada.fecha);
+            setValue("categoria", tareaBuscada.categoria);
+            setValue("descripcion", tareaBuscada.descripcion);
+            setValue("prioridad", tareaBuscada.prioridad);
+          } else {
+            Swal.fire({
+              title: "Error",
+              text: "No se pudo obtener la información de la tarea.",
+              icon: "error",
+              background: "#18181b",
+              color: "#f4f4f5",
+            });
+          }
+        } catch (error) {
+          console.error("Error al cargar la tarea:", error);
+        }
       }
-    }
-  }, [id, titulo, buscarTareaApi, setValue]);
+    };
+
+    cargarTarea();
+  }, [id, titulo, setValue]);
 
   const onSubmit: SubmitHandler<TareaFormData> = (data, e) => {
     const datosConImagen = { ...data, imagen: "" };
