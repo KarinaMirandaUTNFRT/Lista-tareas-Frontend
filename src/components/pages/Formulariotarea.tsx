@@ -13,6 +13,12 @@ import {
   MdDataUsage,
 } from "react-icons/md";
 
+import { 
+  buscarTareaApi, 
+  crearTareaApi, 
+  editarTareaApi 
+} from "../../helpers/queries"; 
+
 interface FormularioTareaProps {
   titulo: string;
 }
@@ -51,28 +57,48 @@ const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
   const prioridadSeleccionada = watch("prioridad");
 
   // traigo los datos que necesito del contexto
-  //const { crearTarea, buscarTarea, editarTarea } = useAppContext();
+  //const { crearTareaApi, buscarTareaApi, editarTareaApi } = useAppContext();
   // traer el id de la ruta
   const { id } = useParams<{ id: string }>();
   const navegacion = useNavigate();
 
   useEffect(() => {
-    if (titulo.includes("Editar") && id && buscarTarea) {
-      const tareaBuscada = buscarTarea(id);
-      if (tareaBuscada) {
-        setValue("nombreTarea", tareaBuscada.nombreTarea);
-        setValue("fecha", tareaBuscada.fecha);
-        setValue("categoria", tareaBuscada.categoria);
-        setValue("descripcion", tareaBuscada.descripcion);
-        setValue("prioridad", tareaBuscada.prioridad);
+    const cargarTarea = async () => {
+      if (titulo.includes("Editar") && id && buscarTareaApi) {
+        try {
+          const respuesta = await buscarTareaApi(id);
+          if (respuesta.ok) {
+            // Esperamos a que el JSON se procese
+            const tareaBuscada = await respuesta.json();
+            
+            // Ahora tareaBuscada tiene los datos reales y TypeScript no dará error
+            setValue("nombreTarea", tareaBuscada.nombreTarea);
+            setValue("fecha", tareaBuscada.fecha);
+            setValue("categoria", tareaBuscada.categoria);
+            setValue("descripcion", tareaBuscada.descripcion);
+            setValue("prioridad", tareaBuscada.prioridad);
+          } else {
+            Swal.fire({
+              title: "Error",
+              text: "No se pudo obtener la información de la tarea.",
+              icon: "error",
+              background: "#18181b",
+              color: "#f4f4f5",
+            });
+          }
+        } catch (error) {
+          console.error("Error al cargar la tarea:", error);
+        }
       }
-    }
-  }, [id, titulo, buscarTarea, setValue]);
+    };
+
+    cargarTarea();
+  }, [id, titulo, setValue]);
 
   const onSubmit: SubmitHandler<TareaFormData> = (data, e) => {
     const datosConImagen = { ...data, imagen: "" };
-    if (titulo.includes("Crear") && crearTarea) {
-      crearTarea(data);
+    if (titulo.includes("Crear") && crearTareaApi) {
+      crearTareaApi(data);
       Swal.fire({
         title: "Tarea creada",
         text: `La Tarea '${data.nombreTarea}' fue creado correctamente`,
@@ -84,8 +110,8 @@ const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
       if (e) {
         (e.target as HTMLFormElement).reset();
       }
-    } else if (id && editarTarea) {
-      editarTarea(id, datosConImagen);
+    } else if (id && editarTareaApi) {
+      editarTareaApi(id, datosConImagen);
       Swal.fire({
         title: "Tarea editada",
         text: `La Tarea '${data.nombreTarea}' fue editado correctamente`,
