@@ -2,7 +2,7 @@ import { useForm, type SubmitHandler } from "react-hook-form";
 import type { Tarea } from "../../interfaces/tareas";
 import { useAppContext } from "../../context/AppContext";
 import Swal from "sweetalert2";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import {
   MdOutlineDesktopWindows,
