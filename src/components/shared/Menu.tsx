@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { LuMenu, LuX, LuCodeXml, LuLogOut } from "react-icons/lu";
-import { Link, NavLink, useNavigate } from "react-router";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useAppContext } from "../../context/AppContext";
 
 const Menu = () => {
