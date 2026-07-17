@@ -9,7 +9,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ProtectorRutas from "./components/routes/ProtectorRutas";
 import { useEffect, useState } from "react";
 import { AppContext } from "./context/AppContext";
-import type { tarea, tareaFormData } from "./interfaces/tareas";
+import type { Tarea, tareaFormData } from "./interfaces/tareas";
 import Error404 from "./components/pages/Error404";
 
 function App() {
@@ -23,7 +23,7 @@ function App() {
   const tareasLocalStorage = JSON.parse(
     localStorage.getItem("tareasKey") || "[]",
   );
-  const [tareas, setTareas] = useState<tarea[]>(tareasLocalStorage);
+  const [tareas, setTareas] = useState<Tarea[]>(tareasLocalStorage);
 
   useEffect(() => {
     sessionStorage.setItem("usuarioKey", JSON.stringify(usuarioLogueado));
@@ -35,7 +35,7 @@ function App() {
 
   // logicar para trabajar con los sercicios
   const crearTarea = (dataTarea: tareaFormData) => {
-    const tareaNuevo: tarea = {
+    const tareaNuevo: Tarea = {
       ...dataTarea,
       id: crypto.randomUUID(),
     };
@@ -62,7 +62,7 @@ function App() {
     setTareas(tareasEditados);
   };
 
-  const buscarTarea = (idTarea: string): tarea | undefined => {
+  const buscarTarea = (idTarea: string): Tarea | undefined => {
     return tareas.find((item) => item.id === idTarea);
   };
 

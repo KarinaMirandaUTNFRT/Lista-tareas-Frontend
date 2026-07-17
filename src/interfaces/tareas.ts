@@ -1,4 +1,4 @@
-export interface tarea  {
+export interface Tarea  {
   id: string;
   nombreTarea: string;
   fecha: Date;
@@ -7,4 +7,4 @@ export interface tarea  {
   prioridad: string; 
 }
 
-export type tareaFormData = Omit<tarea , 'id'>;
+export type tareaFormData = Omit<Tarea , 'id'>;

@@ -1,5 +1,5 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
-import type { TareaFormData } from "../../interfaces/tareas";
+import type { Tarea } from "../../interfaces/tareas";
 import { useAppContext } from "../../context/AppContext";
 import Swal from "sweetalert2";
 import { useNavigate, useParams } from "react-router";
@@ -10,7 +10,7 @@ import {
   MdOutlineDashboard,
   MdOutlineCellTower,
   MdConnectWithoutContact,
-  MdDataUsage,
+  
 } from "react-icons/md";
 
 import { 
@@ -51,13 +51,13 @@ const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
     formState: { errors },
     setValue,
     watch,
-  } = useForm<TareaFormData>();
+  } = useForm<Tarea>();
 
   const areaSeleccionada = watch("categoria");
   const prioridadSeleccionada = watch("prioridad");
 
   // traigo los datos que necesito del contexto
-  //const { crearTareaApi, buscarTareaApi, editarTareaApi } = useAppContext();
+  const { crearTarea, buscarTarea, editarTarea } = useAppContext();
   // traer el id de la ruta
   const { id } = useParams<{ id: string }>();
   const navegacion = useNavigate();
@@ -95,10 +95,10 @@ const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
     cargarTarea();
   }, [id, titulo, setValue]);
 
-  const onSubmit: SubmitHandler<TareaFormData> = (data, e) => {
+  const onSubmit: SubmitHandler<Tarea> = (data, e) => {
     const datosConImagen = { ...data, imagen: "" };
-    if (titulo.includes("Crear") && crearTareaApi) {
-      crearTareaApi(data);
+    if (titulo.includes("Crear") && crearTarea) {
+      crearTarea(data);
       Swal.fire({
         title: "Tarea creada",
         text: `La Tarea '${data.nombreTarea}' fue creado correctamente`,
@@ -110,8 +110,8 @@ const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
       if (e) {
         (e.target as HTMLFormElement).reset();
       }
-    } else if (id && editarTareaApi) {
-      editarTareaApi(id, datosConImagen);
+    } else if (id && editarTarea) {
+      editarTarea(id, datosConImagen);
       Swal.fire({
         title: "Tarea editada",
         text: `La Tarea '${data.nombreTarea}' fue editado correctamente`,

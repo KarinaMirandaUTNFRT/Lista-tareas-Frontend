@@ -1,4 +1,4 @@
-import type { tarea  } from "../interfaces/tareas";
+import type { Tarea  } from "../interfaces/tareas";
 
 const urlTareas = import.meta.env.VITE_SERVICIO
 
@@ -22,7 +22,7 @@ export const buscarTareaApi = async (id:string):Promise<Response> =>{
     }
 };
 
-export const crearTareaApi = async (tarea: tarea ):Promise<Response> =>{
+export const crearTareaApi = async (tarea: Tarea ):Promise<Response> =>{
     try{
         const respuesta = await fetch(urlTareas, {
             method: 'POST',
@@ -37,7 +37,7 @@ export const crearTareaApi = async (tarea: tarea ):Promise<Response> =>{
         throw error
     }
 };
-export const editarTareaApi = async (id:string, tarea: tarea ):Promise<Response> =>{
+export const editarTareaApi = async (id:string, tarea: Tarea ):Promise<Response> =>{
     try{
         const respuesta = await fetch(`${urlTareas}/${id}`, {
             method: 'PUT',

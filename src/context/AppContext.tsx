@@ -1,14 +1,14 @@
 import { createContext, useContext } from "react";
-import type { tarea, tareaFormData } from "../interfaces/tareas";
+import type { Tarea, tareaFormData } from "../interfaces/tareas";
 
 export interface AppContextType {
   usuarioLogueado: boolean;
   setUsuarioLogueado: React.Dispatch<React.SetStateAction<boolean>>;
-  tareas: tarea[];
+  tareas: Tarea[];
   crearTarea: (nuevoTarea: tareaFormData) => void;
   borrarTarea: (idTarea: string) => void;
   editarTarea: (idTarea: string, tareaEditar: tareaFormData) => void;
-  buscarTarea: (idTarea: string) => tarea | undefined;
+  buscarTarea: (idTarea: string) => Tarea | undefined;
 }
 
 export const AppContext = createContext<AppContextType | undefined>(undefined);
