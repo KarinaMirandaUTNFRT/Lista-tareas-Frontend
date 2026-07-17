@@ -1,4 +1,4 @@
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import error from '../../assets/error404.jpg'
 const Error404 = () => {
     return (
