@@ -1,4 +1,4 @@
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import error from '../../assets/error404.jpg'
 const Error404 = () => {
     return (
@@ -8,6 +8,5 @@ const Error404 = () => {
             <Link to={'/'} className='text-blue-400 hover:underline'>Vuelve al inicio</Link>
         </div>
     );
-};
-
+}
 export default Error404;

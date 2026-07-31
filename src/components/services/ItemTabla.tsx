@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import type { Tarea } from "../../interfaces/tareas";
 import Swal from "sweetalert2";
 import { useAppContext } from "../../context/AppContext";

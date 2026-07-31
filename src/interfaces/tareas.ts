@@ -1,10 +1,10 @@
-export interface Tarea {
+export interface Tarea  {
   id: string;
   nombreTarea: string;
   fecha: Date;
-  imagen: string;
   categoria: string;
   descripcion: string;
+  prioridad: string; 
 }
 
-export type TareaFormData = Omit<Tarea, 'id'>;
+export type tareaFormData = Omit<Tarea , 'id'>;

@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import ItemTabla from "../services/ItemTabla";
 import { LuCirclePlus } from "react-icons/lu";
 import { useAppContext } from "../../context/AppContext";

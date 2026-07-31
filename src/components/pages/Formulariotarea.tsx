@@ -1,21 +1,61 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
-import type { TareaFormData } from "../../interfaces/tareas";
+import type { Tarea } from "../../interfaces/tareas";
 import { useAppContext } from "../../context/AppContext";
 import Swal from "sweetalert2";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
+import {
+  MdOutlineDesktopWindows,
+  MdOutlineAssignmentInd,
+  MdOutlineDashboard,
+  MdOutlineCellTower,
+  MdConnectWithoutContact,
+  
+} from "react-icons/md";
+
+import { 
+  buscarTareaApi, 
+  crearTareaApi, 
+  editarTareaApi 
+} from "../../helpers/queries"; 
 
 interface FormularioTareaProps {
   titulo: string;
 }
-
+const iconosPorArea: Record<string, { Icono: any; color: string }> = {
+  Ventas: {
+    Icono: MdOutlineDesktopWindows,
+    color: "text-emerald-400 bg-emerald-950/30 border-emerald-500/20",
+  },
+  Proveedores: {
+    Icono: MdOutlineAssignmentInd,
+    color: "text-amber-400 bg-amber-950/30 border-amber-500/20",
+  },
+  Marketing: {
+    Icono: MdOutlineDashboard,
+    color: "text-purple-400 bg-purple-950/30 border-purple-500/20",
+  },
+  Sistemas: {
+    Icono: MdOutlineCellTower,
+    color: "text-blue-400 bg-blue-950/30 border-blue-500/20",
+  },
+  "Atencion al Cliente": {
+    Icono: MdConnectWithoutContact,
+    color: "text-pink-400 bg-pink-950/30 border-pink-500/20",
+  },
+};
 const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
     setValue,
-  } = useForm<TareaFormData>();
+    watch,
+  } = useForm<Tarea>();
+
+  const areaSeleccionada = watch("categoria");
+  const prioridadSeleccionada = watch("prioridad");
+
   // traigo los datos que necesito del contexto
   const { crearTarea, buscarTarea, editarTarea } = useAppContext();
   // traer el id de la ruta
@@ -23,20 +63,40 @@ const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
   const navegacion = useNavigate();
 
   useEffect(() => {
-    if (titulo.includes("Editar") && id && buscarTarea) {
-      const tareaBuscada = buscarTarea(id);
-      if (tareaBuscada) {
-        setValue("nombreTarea", tareaBuscada.nombreTarea);
-        setValue("fecha", tareaBuscada.fecha);
-        setValue("categoria", tareaBuscada.categoria);
-        setValue("descripcion", tareaBuscada.descripcion);
-        setValue("imagen", tareaBuscada.imagen);
+    const cargarTarea = async () => {
+      if (titulo.includes("Editar") && id && buscarTareaApi) {
+        try {
+          const respuesta = await buscarTareaApi(id);
+          if (respuesta.ok) {
+            // Esperamos a que el JSON se procese
+            const tareaBuscada = await respuesta.json();
+            
+            // Ahora tareaBuscada tiene los datos reales y TypeScript no dará error
+            setValue("nombreTarea", tareaBuscada.nombreTarea);
+            setValue("fecha", tareaBuscada.fecha);
+            setValue("categoria", tareaBuscada.categoria);
+            setValue("descripcion", tareaBuscada.descripcion);
+            setValue("prioridad", tareaBuscada.prioridad);
+          } else {
+            Swal.fire({
+              title: "Error",
+              text: "No se pudo obtener la información de la tarea.",
+              icon: "error",
+              background: "#18181b",
+              color: "#f4f4f5",
+            });
+          }
+        } catch (error) {
+          console.error("Error al cargar la tarea:", error);
+        }
       }
-    }
-  }, []);
+    };
 
-  const onSubmit: SubmitHandler<TareaFormData> = (data, e) => {
-    console.log(data);
+    cargarTarea();
+  }, [id, titulo, setValue]);
+
+  const onSubmit: SubmitHandler<Tarea> = (data, e) => {
+    const datosConImagen = { ...data, imagen: "" };
     if (titulo.includes("Crear") && crearTarea) {
       crearTarea(data);
       Swal.fire({
@@ -50,8 +110,8 @@ const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
       if (e) {
         (e.target as HTMLFormElement).reset();
       }
-    } else if (id) {
-      editarTarea(id, data);
+    } else if (id && editarTarea) {
+      editarTarea(id, datosConImagen);
       Swal.fire({
         title: "Tarea editada",
         text: `La Tarea '${data.nombreTarea}' fue editado correctamente`,
@@ -87,7 +147,7 @@ const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
               </label>
               <input
                 type="text"
-                placeholder="Ej: Diseño de sitio web institucional"
+                placeholder="Ej: completar planilla exel"
                 className={inputClass(!!errors.nombreTarea)}
                 {...register("nombreTarea", {
                   required: "El nombre es obligatorio",
@@ -103,7 +163,7 @@ const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
             {/* Fecha */}
             <div>
               <label className="block text-sm font-medium text-zinc-300 mb-2">
-                Fecha*
+                Fecha limite de entrega*
               </label>
               <input
                 type="date"
@@ -111,7 +171,7 @@ const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
                 className={inputClass(!!errors.fecha)}
                 {...register("fecha", {
                   required: "La fecha es obligatoria",
-               })}
+                })}
               />
               <p className="text-red-500 text-xs mt-1 italic">
                 {errors.fecha?.message}
@@ -152,7 +212,34 @@ const FormularioTarea = ({ titulo }: FormularioTareaProps) => {
                 {errors.categoria?.message}
               </p>
             </div>
-            
+
+            <div>
+              <label className="block text-sm font-medium text-zinc-300 mb-2">
+                Prioridad*
+              </label>
+              <select
+                className={inputClass(!!errors.prioridad)}
+                {...register("prioridad", {
+                  required: "Seleccione un estado",
+                })}
+              >
+                <option value="" className="bg-zinc-900">
+                  Seleccione una opción
+                </option>
+                <option value="alta" className="bg-zinc-900">
+                  Alta
+                </option>
+                <option value="media" className="bg-zinc-900">
+                  Media
+                </option>
+                <option value="baja" className="bg-zinc-900">
+                  Baja
+                </option>
+              </select>
+              <p className="text-red-500 text-xs mt-1 italic">
+                {errors.prioridad?.message}
+              </p>
+            </div>
 
             {/* Descripción */}
             <div className="md:col-span-2">

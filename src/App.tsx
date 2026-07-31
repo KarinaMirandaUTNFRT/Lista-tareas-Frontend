@@ -9,7 +9,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ProtectorRutas from "./components/routes/ProtectorRutas";
 import { useEffect, useState } from "react";
 import { AppContext } from "./context/AppContext";
-import type { Tarea, TareaFormData } from "./interfaces/tareas";
+import type { Tarea, tareaFormData } from "./interfaces/tareas";
 import Error404 from "./components/pages/Error404";
 
 function App() {
@@ -34,7 +34,7 @@ function App() {
   }, [tareas]);
 
   // logicar para trabajar con los sercicios
-  const crearTarea = (dataTarea: TareaFormData) => {
+  const crearTarea = (dataTarea: tareaFormData) => {
     const tareaNuevo: Tarea = {
       ...dataTarea,
       id: crypto.randomUUID(),
@@ -51,7 +51,7 @@ function App() {
 
   const editarTarea = (
     idTarea: string,
-    tareaEditar: TareaFormData,
+    tareaEditar: tareaFormData,
   ) => {
     const tareasEditados = tareas.map((itemTarea) => {
       if (itemTarea.id === idTarea) {

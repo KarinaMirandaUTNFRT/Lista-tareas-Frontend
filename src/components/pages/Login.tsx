@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useAppContext } from "../../context/AppContext";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 interface LoginFormInputs {
